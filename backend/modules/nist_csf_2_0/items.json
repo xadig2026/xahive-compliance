@@ -1,0 +1,1380 @@
+[
+  {
+    "id": "DE.AE-02",
+    "function": "DETECT",
+    "category": "DE.AE",
+    "question": "How does your team analyze security alerts and anomalies?",
+    "practices": [
+      "Establish a Security Operations Centre (SOC) function (internal or managed) with defined alert triage and analysis procedures.",
+      "Implement a tiered alert triage process: Level 1 analysts filter and escalate; Level 2/3 analysts perform deeper investigation.",
+      "Use SIEM correlation rules and playbooks to guide systematic analysis of alert clusters.",
+      "Define alert SLAs by severity (e.g., Critical: 15 min response, High: 1 hour, Medium: 4 hours, Low: 24 hours).",
+      "Document analysis findings in the ticketing or case management system for each investigation."
+    ]
+  },
+  {
+    "id": "DE.AE-03",
+    "function": "DETECT",
+    "category": "DE.AE",
+    "question": "How do you correlate data from different security tools and sources?",
+    "practices": [
+      "Aggregate logs and telemetry from endpoints, networks, cloud platforms, and identity systems into a centralized SIEM.",
+      "Build SIEM correlation rules that combine signals from multiple sources (e.g., failed login + unusual network traffic + large file access) to detect complex attacks.",
+      "Integrate threat intelligence feeds into the SIEM to enrich alerts with contextual IoC data.",
+      "Use Security Orchestration, Automation, and Response (SOAR) to automate initial correlation and enrichment steps.",
+      "Test correlation rules quarterly through simulated attack scenarios to validate detection coverage."
+    ]
+  },
+  {
+    "id": "DE.AE-04",
+    "function": "DETECT",
+    "category": "DE.AE",
+    "question": "How do you estimate the scope and impact of a potential security event during analysis?",
+    "practices": [
+      "Train analysts to rapidly assess event scope by mapping affected assets to the asset inventory and criticality ratings.",
+      "Use standardized impact assessment criteria aligned to the risk methodology (confidentiality, integrity, availability, business impact).",
+      "Leverage threat intelligence to assess the potential TTPs (Tactics, Techniques, Procedures) associated with detected events. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 35 Source: NIST CSWP 29 (February 2024)",
+      "Escalate events with potential high-impact scope to senior analysts and the CISO within defined time thresholds.",
+      "Document preliminary impact estimates in the incident ticket and refine them as the investigation progresses."
+    ]
+  },
+  {
+    "id": "DE.AE-06",
+    "function": "DETECT",
+    "category": "DE.AE",
+    "question": "How is adverse event information shared with the right people and systems in a timely way?",
+    "practices": [
+      "Define notification workflows in the SIEM/SOAR that automatically alert designated responders when thresholds are crossed.",
+      "Maintain up-to-date escalation contact lists and on-call schedules for the security team.",
+      "Implement automated ticket creation in the ITSM system for all escalated security events.",
+      "Share event indicators (IoCs) with relevant tools (firewalls, EDR, DLP) for automated blocking or alerting.",
+      "Ensure event information is accessible only to authorized staff using role-based access to case management systems."
+    ]
+  },
+  {
+    "id": "DE.AE-07",
+    "function": "DETECT",
+    "category": "DE.AE",
+    "question": "How is threat intelligence used during event analysis?",
+    "practices": [
+      "Feed threat intelligence platforms (TIP) into the SIEM for real-time IoC matching.",
+      "Enrich alerts automatically with contextual information from threat intelligence (actor profiles, campaign data, MITRE ATT&CK; mappings).",
+      "Train analysts to search threat intelligence sources when investigating novel or suspicious alerts.",
+      "Maintain a repository of internal threat intelligence derived from past incidents to inform future analysis.",
+      "Update detection rules and signatures promptly based on new threat intelligence."
+    ]
+  },
+  {
+    "id": "DE.AE-08",
+    "function": "DETECT",
+    "category": "DE.AE",
+    "question": "How does your organization formally declare a cybersecurity incident?",
+    "practices": [
+      "Define clear incident declaration criteria in the Incident Response Plan, covering event types, severity thresholds, and data exposure indicators.",
+      "Train all SOC analysts and IT responders on the incident declaration criteria.",
+      "Implement a formal incident declaration workflow in the ITSM/case management system, triggering the IRP.",
+      "Require documentation of the reason for incident declaration (or non-declaration) for all escalated events. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 36 Source: NIST CSWP 29 (February 2024)",
+      "Conduct post-incident reviews to assess whether declaration criteria are appropriately calibrated and update them as needed. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 37 Source: NIST CSWP 29 (February 2024) Actions regarding a detected cybersecurity incident are taken. Responses to detected cybersecurity incidents are managed."
+    ]
+  },
+  {
+    "id": "DE.CM-01",
+    "function": "DETECT",
+    "category": "DE.CM",
+    "question": "How do you monitor network traffic for threats and anomalies?",
+    "practices": [
+      "Deploy Intrusion Detection/Prevention Systems (IDS/IPS) at network perimeter and critical internal segments.",
+      "Implement Network Detection and Response (NDR) tools to analyse traffic for anomalous patterns and lateral movement.",
+      "Monitor DNS queries and web proxy logs for connections to known-malicious domains (threat intelligence-informed filtering).",
+      "Alert on network anomalies (large data transfers, unusual port usage, new external connections) within defined SLA windows.",
+      "Review network monitoring coverage during annual architecture reviews to ensure all critical segments are instrumented."
+    ]
+  },
+  {
+    "id": "DE.CM-02",
+    "function": "DETECT",
+    "category": "DE.CM",
+    "question": "How is physical security monitoring conducted at your facilities?",
+    "practices": [
+      "Install CCTV systems covering all entry/exit points, server rooms, and sensitive areas, with footage retained for at least 90 days.",
+      "Deploy motion sensors and door/window alarms for after-hours monitoring of restricted areas.",
+      "Review physical access logs after any security incident or anomaly.",
+      "Conduct regular physical security patrols and visitor log audits.",
+      "Integrate physical security alerts with the security operations workflow for coordinated response. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 33 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "DE.CM-03",
+    "function": "DETECT",
+    "category": "DE.CM",
+    "question": "How do you monitor user and device activity for insider threats and misuse?",
+    "practices": [
+      "Deploy User and Entity Behaviour Analytics (UEBA) or equivalent tooling to baseline normal user behaviour and detect anomalies.",
+      "Monitor privileged account activity through Privileged Access Management (PAM) solutions with session recording for critical systems.",
+      "Implement DLP controls to detect unauthorized data copying, exfiltration, or access to classified data.",
+      "Comply with applicable privacy laws when implementing employee monitoring (e.g., transparency notices, limiting scope to work systems).",
+      "Alert on high-risk activities (mass file downloads, access outside business hours, new external email forwards) within 24 hours."
+    ]
+  },
+  {
+    "id": "DE.CM-06",
+    "function": "DETECT",
+    "category": "DE.CM",
+    "question": "How do you monitor third-party and supplier activities for security risks?",
+    "practices": [
+      "Monitor privileged access sessions from third-party vendors using PAM solutions.",
+      "Review supplier access logs at least monthly for critical providers and quarterly for others.",
+      "Implement just-in-time access provisioning for vendor accounts to minimize standing third-party access.",
+      "Monitor API integrations with suppliers for unusual traffic volumes, error rates, or data patterns.",
+      "Include supplier access monitoring as a standing agenda item in quarterly third-party risk reviews."
+    ]
+  },
+  {
+    "id": "DE.CM-09",
+    "function": "DETECT",
+    "category": "DE.CM",
+    "question": "What endpoint and system-level monitoring do you have in place?",
+    "practices": [
+      "Deploy Endpoint Detection and Response (EDR) agents on all managed endpoints and servers.",
+      "Enable OS-level audit logging (Windows Event Log, Syslog) and forward all security-relevant events to the SIEM.",
+      "Monitor runtime environments (containers, serverless functions) for anomalous process execution or network connections.",
+      "Implement file integrity monitoring (FIM) on critical system files and configurations.",
+      "Alert on indicators of compromise (IoCs) from threat intelligence feeds matched against endpoint telemetry. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 34 Source: NIST CSWP 29 (February 2024) Anomalies, indicators of compromise, and potentially adverse events are analyzed to characterize events and detect cybersecurity incidents."
+    ]
+  },
+  {
+    "id": "GV.OC-01",
+    "function": "GOVERN",
+    "category": "GV.OC",
+    "question": "How does your organization ensure the mission drives cybersecurity risk management decisions?",
+    "practices": [
+      "Document the organizational mission statement and its relationship to cybersecurity objectives in a formal Mission-to-Risk Alignment record.",
+      "Conduct annual workshops where executives and security leaders map mission-critical services to corresponding risk tolerances.",
+      "Ensure the CISO or equivalent role presents mission-aligned cybersecurity priorities to the board at least annually.",
+      "Embed mission context into all risk assessments, policies, and strategic plans so every control decision can be traced to organizational purpose.",
+      "Maintain a Mission Context Document reviewed and approved by senior leadership, updated when the mission evolves."
+    ]
+  },
+  {
+    "id": "GV.OC-02",
+    "function": "GOVERN",
+    "category": "GV.OC",
+    "question": "How do you identify and engage stakeholders in cybersecurity risk management?",
+    "practices": [
+      "Maintain a Stakeholder Register listing all internal roles (board, executives, IT, legal, HR) and external parties (regulators, customers, partners, suppliers).",
+      "Conduct stakeholder interviews or surveys at least annually to capture evolving cybersecurity expectations.",
+      "Document stakeholder requirements and map them to specific CSF categories or controls.",
+      "Establish regular communication channels (e.g., security steering committee, quarterly briefings) to keep stakeholders informed. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 4 Source: NIST CSWP 29 (February 2024)",
+      "Review stakeholder needs during major organizational changes, mergers, or regulatory updates."
+    ]
+  },
+  {
+    "id": "GV.OC-03",
+    "function": "GOVERN",
+    "category": "GV.OC",
+    "question": "How does your organization track and comply with cybersecurity-related legal and regulatory",
+    "practices": [
+      "Maintain a Regulatory Compliance Register mapping all applicable laws (e.g., PIPEDA, PHIPA, GDPR, sector regulations) to specific control requirements.",
+      "Assign a compliance owner responsible for monitoring regulatory changes and updating the register within 30 days of new requirements.",
+      "Conduct annual legal and regulatory gap assessments, engaging legal counsel to confirm scope.",
+      "Integrate contractual security requirements from vendor and customer agreements into internal control reviews.",
+      "Implement a Privacy Impact Assessment (PIA) process for all new systems and data initiatives, aligned with applicable privacy law obligations."
+    ]
+  },
+  {
+    "id": "GV.OC-04",
+    "function": "GOVERN",
+    "category": "GV.OC",
+    "question": "How do you identify and communicate the services and capabilities that external parties depend on?",
+    "practices": [
+      "Perform a Business Impact Analysis (BIA) identifying all externally-facing services and their criticality to stakeholders.",
+      "Maintain a Service Catalog documenting external dependencies with associated uptime, availability, and security commitments.",
+      "Include external dependency information in customer contracts, SLAs, and trust centre disclosures.",
+      "Communicate planned maintenance, outages, or security changes to external stakeholders through established notification procedures.",
+      "Review the service catalog annually and after major incidents or organizational changes."
+    ]
+  },
+  {
+    "id": "GV.OC-05",
+    "function": "GOVERN",
+    "category": "GV.OC",
+    "question": "How does your organization identify and manage the IT/OT services and capabilities it depends on",
+    "practices": [
+      "Maintain a Dependency Map cataloguing all systems, cloud services, SaaS tools, and third-party platforms the organization relies on.",
+      "Classify dependencies by criticality (mission-critical, important, routine) and document fallback procedures for each.",
+      "Review dependencies quarterly, especially when onboarding new vendors or decommissioning systems. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 5 Source: NIST CSWP 29 (February 2024)",
+      "Communicate internal dependency information to operations, IT, and continuity planning teams.",
+      "Link dependencies to the Business Continuity Plan (BCP) and Disaster Recovery Plan (DRP). The organization's priorities, constraints, risk tolerance and appetite statements, and assumptions are established, communicated, and used to support operational risk decisions."
+    ]
+  },
+  {
+    "id": "GV.OV-01",
+    "function": "GOVERN",
+    "category": "GV.OV",
+    "question": "How does your organization review risk management outcomes and use them to refine strategy?",
+    "practices": [
+      "Establish a quarterly Cybersecurity Risk Review meeting where risk register trends, incident data, and control effectiveness metrics are presented to leadership.",
+      "Produce a Cybersecurity Performance Dashboard with KPIs (e.g., mean time to detect, patch compliance rate) that feeds into strategy reviews.",
+      "Require the CISO to present an annual Cybersecurity Strategy Review to the board, documenting strategy adjustments based on performance data.",
+      "Capture lessons learned from audits, incidents, and exercises and track their incorporation into strategy updates.",
+      "Document all strategy adjustments with rationale linked to specific performance findings."
+    ]
+  },
+  {
+    "id": "GV.OV-02",
+    "function": "GOVERN",
+    "category": "GV.OV",
+    "question": "How do you ensure the risk management strategy remains comprehensive and current?",
+    "practices": [
+      "Conduct an annual Strategic Alignment Review comparing the cybersecurity strategy against the current threat landscape, regulatory changes, and business priorities.",
+      "Use threat intelligence feeds to identify emerging risks not covered by current strategy.",
+      "Benchmark the strategy against industry peers and applicable frameworks (e.g., NIST CSF, CIS Controls).",
+      "Engage external auditors or assessors at least every two years to provide independent coverage assessment.",
+      "Update the strategy within 60 days of identifying material gaps."
+    ]
+  },
+  {
+    "id": "GV.OV-03",
+    "function": "GOVERN",
+    "category": "GV.OV",
+    "question": "How does your organization evaluate and act on cybersecurity performance metrics?",
+    "practices": [
+      "Define a set of cybersecurity Key Performance Indicators (KPIs) and Key Risk Indicators (KRIs) at the start of each year, approved by the CISO and executive team.",
+      "Report KPIs/KRIs monthly to the security team and quarterly to leadership.",
+      "Trigger corrective action plans when KPIs fall below defined thresholds.",
+      "Use metrics from audits, vulnerability scans, phishing tests, and incident reports as input to the performance evaluation.",
+      "Document evaluation findings and track improvement actions to closure. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 11 Source: NIST CSWP 29 (February 2024) Cyber supply chain risk management processes are identified, established, managed, monitored, and improved by organizational stakeholders."
+    ]
+  },
+  {
+    "id": "GV.PO-01",
+    "function": "GOVERN",
+    "category": "GV.PO",
+    "question": "How is your cybersecurity risk management policy established and enforced?",
+    "practices": [
+      "Develop a comprehensive Information Security Policy Suite covering data classification, access control, incident response, acceptable use, and vendor management.",
+      "Obtain formal approval from senior leadership (CEO/Board) and assign a policy owner responsible for maintenance.",
+      "Publish policies on an accessible internal portal and confirm staff acknowledgment through signed acceptance or LMS completion records.",
+      "Enforce policy compliance through internal audits, technical controls, and disciplinary procedures for violations.",
+      "Align policies with applicable regulatory requirements and reference authoritative standards (e.g., ISO 27001, NIST SP 800-53)."
+    ]
+  },
+  {
+    "id": "GV.PO-02",
+    "function": "GOVERN",
+    "category": "GV.PO",
+    "question": "How frequently and under what triggers do you review and update cybersecurity policies?",
+    "practices": [
+      "Establish a policy review cycle of at least once per year, with mandatory out-of-cycle reviews triggered by: major incidents, significant regulatory changes, new technologies, or organizational restructuring.",
+      "Document review dates, changes made, and approval signatures in a Policy Version Control Log.",
+      "Communicate policy updates to all affected staff within 30 days of approval via email, intranet, or LMS notification.",
+      "Require staff re-acknowledgment when policies are materially updated.",
+      "Track open policy exceptions and ensure they are risk-accepted, time-limited, and revisited at least quarterly. Results of organization-wide cybersecurity risk management activities and performance are used to inform, improve, and adjust the risk management strategy. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 10 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "GV.RM-01",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "How are cybersecurity risk management objectives defined and approved?",
+    "practices": [
+      "Develop a formal Cybersecurity Risk Management Objectives document, co-authored by the CISO, CFO, and business unit heads.",
+      "Obtain formal approval from the board or executive committee, documented in meeting minutes.",
+      "Align risk objectives to organizational strategic goals and compliance requirements.",
+      "Review and reaffirm objectives at least annually or following significant business changes.",
+      "Communicate approved objectives to all relevant staff through policy documents and awareness materials."
+    ]
+  },
+  {
+    "id": "GV.RM-02",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "How do you define, communicate, and maintain risk appetite and tolerance?",
+    "practices": [
+      "Draft a Risk Appetite Statement approved by the board covering acceptable risk thresholds for confidentiality, integrity, availability, and privacy.",
+      "Define quantitative tolerance bands (e.g., maximum acceptable data breach probability, acceptable downtime hours per year).",
+      "Publish the risk appetite statement in the information security policy and on internal knowledge bases.",
+      "Review the risk appetite annually and adjust based on threat landscape, business changes, or post-incident lessons.",
+      "Train senior leaders and risk owners on interpreting and applying the risk tolerance thresholds in day-to-day decisions."
+    ]
+  },
+  {
+    "id": "GV.RM-03",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "How is cybersecurity integrated into your organization's enterprise risk management (ERM)",
+    "practices": [
+      "Formally incorporate cybersecurity as a risk category within the ERM framework alongside financial, operational, and reputational risks. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 6 Source: NIST CSWP 29 (February 2024)",
+      "Include the CISO or cybersecurity lead in the enterprise risk committee.",
+      "Align cybersecurity risk reporting cadence with ERM reporting cycles (e.g., quarterly risk committee reviews).",
+      "Map cybersecurity risks to the enterprise risk register using consistent scoring criteria.",
+      "Ensure that cybersecurity risk treatment decisions are escalated through the ERM governance process for significant risks."
+    ]
+  },
+  {
+    "id": "GV.RM-04",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "How does the organization communicate its preferred risk response strategies (accept, avoid,",
+    "practices": [
+      "Document a Risk Response Strategy Policy outlining the circumstances under which each response option (mitigate, accept, transfer, avoid) is appropriate.",
+      "Provide decision trees or approval thresholds to guide risk owners when selecting response options.",
+      "Communicate the strategy through policy documents, training, and risk committee briefings.",
+      "Require documented justification for any risk acceptance decision, approved by the risk owner and CISO.",
+      "Review strategic direction annually or when risk landscape materially changes."
+    ]
+  },
+  {
+    "id": "GV.RM-05",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "How are cybersecurity risk communications structured across internal teams and with external",
+    "practices": [
+      "Establish a Cybersecurity Communication Matrix identifying escalation paths, contact owners, and communication protocols for internal teams, suppliers, and regulators.",
+      "Create clear procedures for reporting cybersecurity risks from suppliers through a Vendor Risk channel or the IT/security help desk.",
+      "Conduct cross-functional risk briefings at least quarterly involving IT, legal, procurement, and operations.",
+      "Publish emergency communication contact lists and update them whenever personnel or supplier changes occur.",
+      "Test communication channels through tabletop exercises at least annually."
+    ]
+  },
+  {
+    "id": "GV.RM-06",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "What standardized methodology does your organization use to assess and prioritize cybersecurity",
+    "practices": [
+      "Adopt a formal risk quantification methodology (e.g., NIST SP 800-30, FAIR) and document it in the Risk Assessment Procedure. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 7 Source: NIST CSWP 29 (February 2024)",
+      "Use a consistent risk scoring matrix (likelihood \u00d7 impact) applied uniformly across all risk assessments.",
+      "Maintain a centralized Risk Register updated after every assessment, incident, or significant change.",
+      "Train all risk owners and assessors on the standardized methodology.",
+      "Conduct inter-rater calibration sessions at least annually to ensure consistent risk scoring across teams."
+    ]
+  },
+  {
+    "id": "GV.RM-07",
+    "function": "GOVERN",
+    "category": "GV.RM",
+    "question": "How does your organization identify and leverage positive risks or strategic cybersecurity",
+    "practices": [
+      "Expand risk discussions to explicitly include upside risks \u2014 opportunities arising from improved security posture (e.g., competitive advantage, customer trust, faster cloud adoption).",
+      "Include an 'Opportunities' section in risk committee agendas and risk register templates.",
+      "Encourage the CISO to present potential cybersecurity-enabled business benefits (e.g., certifications, market differentiation) to leadership.",
+      "Document positive risk decisions alongside negative risk decisions in the risk register.",
+      "Reference strategic opportunities in the annual cybersecurity strategy and board presentations. Cybersecurity roles, responsibilities, and authorities to foster accountability, performance assessment, and continuous improvement are established and communicated."
+    ]
+  },
+  {
+    "id": "GV.RR-01",
+    "function": "GOVERN",
+    "category": "GV.RR",
+    "question": "How does leadership demonstrate accountability for cybersecurity risk and promote a security",
+    "practices": [
+      "Assign ultimate cybersecurity accountability to the board or C-suite, documented in governance charters.",
+      "Include cybersecurity objectives in executive performance reviews and compensation frameworks.",
+      "Require the board to receive and formally respond to at least one detailed cybersecurity risk briefing per year.",
+      "Publish a leadership-endorsed Cybersecurity Culture Statement visible to all staff.",
+      "Conduct ethics and cybersecurity awareness training mandatory for all leadership, updated annually. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 8 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "GV.RR-02",
+    "function": "GOVERN",
+    "category": "GV.RR",
+    "question": "How are cybersecurity roles and responsibilities defined and enforced across the organization?",
+    "practices": [
+      "Create a Cybersecurity RACI (Responsible, Accountable, Consulted, Informed) matrix covering all key cybersecurity functions.",
+      "Document roles in job descriptions, policies, and operational procedures.",
+      "Communicate roles during onboarding and through annual security awareness training.",
+      "Enforce accountability through performance management processes and audit findings.",
+      "Review and update the RACI matrix annually and when organizational restructuring occurs."
+    ]
+  },
+  {
+    "id": "GV.RR-03",
+    "function": "GOVERN",
+    "category": "GV.RR",
+    "question": "How does the organization ensure cybersecurity is adequately resourced?",
+    "practices": [
+      "Include cybersecurity resource requirements in the annual budgeting process, with documented justification linked to risk assessments.",
+      "Conduct an annual resource adequacy review comparing current staffing, tools, and budget against identified risks.",
+      "Require executive approval for cybersecurity budget allocations and reductions, with documented rationale.",
+      "Track cybersecurity staffing levels against industry benchmarks (e.g., security FTEs per 100 employees).",
+      "Use resource allocation decisions as inputs to the risk acceptance process when resources are insufficient."
+    ]
+  },
+  {
+    "id": "GV.RR-04",
+    "function": "GOVERN",
+    "category": "GV.RR",
+    "question": "How is cybersecurity embedded in HR processes across the employee lifecycle?",
+    "practices": [
+      "Include cybersecurity background screening in pre-employment checks appropriate to role sensitivity.",
+      "Embed cybersecurity responsibilities in all relevant job descriptions.",
+      "Require all staff to complete cybersecurity awareness training upon hire and annually thereafter.",
+      "Include cybersecurity performance objectives in relevant staff annual reviews.",
+      "Establish a formal offboarding process that revokes access and retrieves assets within 24 hours of employment termination. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 9 Source: NIST CSWP 29 (February 2024) Organizational cybersecurity policy is established, communicated, and enforced."
+    ]
+  },
+  {
+    "id": "GV.SC-01",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How is your supply chain cybersecurity risk management program structured and governed?",
+    "practices": [
+      "Establish a formal Third-Party/Supply Chain Risk Management (TPRM/SCRM) program with documented scope, objectives, and governance structure.",
+      "Obtain executive sponsorship and board-level visibility for the program.",
+      "Define policies covering supplier onboarding, due diligence, contractual requirements, and offboarding.",
+      "Publish the program to all procurement, legal, and operational staff.",
+      "Review and update the program at least annually."
+    ]
+  },
+  {
+    "id": "GV.SC-02",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How are supply chain cybersecurity responsibilities defined and shared with third parties?",
+    "practices": [
+      "Include cybersecurity roles and responsibilities in all supplier contracts, including specific obligations for incident notification, data protection, and access management.",
+      "Create a Supplier Security Responsibilities Matrix and share it with all critical vendors.",
+      "Assign an internal Third-Party Risk Owner for each critical supplier.",
+      "Coordinate joint security exercises or tabletops with critical suppliers at least annually.",
+      "Establish escalation paths for security issues involving third parties."
+    ]
+  },
+  {
+    "id": "GV.SC-03",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How is supply chain risk embedded in your overall risk management processes?",
+    "practices": [
+      "Include supply chain risk as a standing item on the enterprise risk register.",
+      "Conduct SCRM-specific risk assessments during vendor onboarding and annually for critical suppliers.",
+      "Integrate SCRM findings into the organization's overall cybersecurity risk posture reporting.",
+      "Link SCRM improvement actions to the broader cybersecurity improvement plan.",
+      "Report supply chain risk metrics alongside other cybersecurity KPIs in executive dashboards. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 12 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "GV.SC-04",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How does your organization maintain an inventory of suppliers and assess their criticality?",
+    "practices": [
+      "Maintain a Supplier Inventory listing all technology vendors, cloud service providers, and data processors.",
+      "Apply a criticality classification (critical, high, medium, low) based on data sensitivity, service dependency, and regulatory exposure.",
+      "Review and update supplier criticality at least annually or when supplier services change materially.",
+      "Prioritize monitoring, due diligence, and contractual security requirements based on criticality tier.",
+      "Ensure procurement and legal are aware of the criticality tiers when negotiating contracts."
+    ]
+  },
+  {
+    "id": "GV.SC-05",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "What cybersecurity requirements do you embed in supplier contracts?",
+    "practices": [
+      "Develop a standard Vendor Security Addendum or Security Schedule for supplier contracts, covering: data protection, incident notification timelines, access control, audit rights, and compliance requirements.",
+      "Tailor contract requirements to supplier criticality \u2014 critical suppliers face more stringent obligations (e.g., SOC 2 reports, pen test results).",
+      "Involve legal and security teams jointly in contract negotiations.",
+      "Track contract security requirement compliance as part of ongoing vendor management.",
+      "Require suppliers to flow down relevant security requirements to their own sub-contractors."
+    ]
+  },
+  {
+    "id": "GV.SC-06",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "What due diligence does your organization perform before engaging a new supplier?",
+    "practices": [
+      "Complete a pre-engagement security questionnaire (e.g., based on SIG, CAIQ, or custom framework) for all new vendors above a defined risk threshold.",
+      "Review supplier certifications (SOC 2, ISO 27001, CSA STAR) and assess their validity and scope.",
+      "Conduct background research on supplier financial stability, legal history, and breach history before signing contracts.",
+      "Escalate high-risk findings to CISO and legal before contract execution.",
+      "Document due diligence findings in the supplier risk record and set re-assessment timelines based on criticality. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 13 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "GV.SC-07",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How do you monitor and manage supplier risk on an ongoing basis?",
+    "practices": [
+      "Conduct annual risk reassessments for critical suppliers and biennial reviews for others.",
+      "Monitor suppliers for security incidents, breaches, or adverse news using automated threat intelligence or manual monitoring.",
+      "Maintain supplier risk scores in the centralized risk register, updated after each assessment.",
+      "Trigger ad hoc assessments when suppliers experience known security incidents or make material changes to their service.",
+      "Escalate unresolved supplier risks and establish remediation timelines tracked to closure."
+    ]
+  },
+  {
+    "id": "GV.SC-08",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How are suppliers incorporated into your incident response planning?",
+    "practices": [
+      "Include critical suppliers in the Incident Response Plan as named participants or contact points.",
+      "Define third-party notification and coordination procedures in the incident response runbooks.",
+      "Conduct annual tabletop exercises that simulate scenarios involving supplier compromises.",
+      "Establish mutual incident notification agreements with critical suppliers, specifying notification timelines and escalation contacts.",
+      "Review supplier participation in incident response after each significant incident or exercise."
+    ]
+  },
+  {
+    "id": "GV.SC-09",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "How do you manage supply chain security throughout the full product and service lifecycle?",
+    "practices": [
+      "Implement a Secure Software Supply Chain policy covering software acquisition, open-source component vetting, and build pipeline integrity.",
+      "Require Software Bills of Materials (SBOMs) from critical software vendors and review them for known vulnerabilities.",
+      "Monitor technology products for end-of-life (EOL) dates and plan transitions before support ends.",
+      "Track supplier performance metrics (e.g., vulnerability disclosure response times, patch SLAs) throughout the relationship.",
+      "Include supply chain security in the annual cybersecurity performance review. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 14 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "GV.SC-10",
+    "function": "GOVERN",
+    "category": "GV.SC",
+    "question": "What procedures govern the offboarding of suppliers from a cybersecurity perspective?",
+    "practices": [
+      "Develop a formal Supplier Offboarding Checklist covering: revoking all access, retrieving or destroying organizational data, terminating interconnections, and settling any security obligations.",
+      "Require suppliers to confirm in writing that all organizational data has been deleted or returned upon contract termination.",
+      "Revoke supplier access to systems, portals, and credentials within 24 hours of contract termination.",
+      "Conduct a post-relationship security review for critical suppliers, documenting any residual risks.",
+      "Retain offboarding documentation for audit purposes per the organization's records retention policy. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 15 Source: NIST CSWP 29 (February 2024) The organization's current cybersecurity risks are understood. Assets that enable the organization to achieve business purposes are identified and managed consistent with their relative importance and risk strategy."
+    ]
+  },
+  {
+    "id": "ID.AM-01",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How does your organization maintain a complete and accurate hardware inventory?",
+    "practices": [
+      "Deploy an automated asset discovery tool (e.g., network scanner, endpoint agent) to detect all hardware connected to the network.",
+      "Maintain a Hardware Asset Inventory in a Configuration Management Database (CMDB) or equivalent tool, capturing: asset type, owner, location, OS version, and support status.",
+      "Reconcile automated inventory data with physical records at least quarterly.",
+      "Establish procedures for registering new hardware before it is connected to the network.",
+      "Flag unauthorized or unmanaged devices detected during scans and investigate within 48 hours."
+    ]
+  },
+  {
+    "id": "ID.AM-02",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How do you track all software, services, and systems in use across the organization?",
+    "practices": [
+      "Use software asset management (SAM) tools or endpoint agents to automatically detect installed software across all managed devices.",
+      "Maintain a Software Inventory listing all approved applications with version, license, vendor, and end-of-life date.",
+      "Maintain a Cloud/SaaS Service Inventory listing all subscribed services, data processed, and account owners.",
+      "Prohibit unapproved software through application whitelisting or MDM policies.",
+      "Review and reconcile software inventories monthly; remove unlicensed or unauthorized software within 30 days of detection. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 16 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "ID.AM-03",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How do you document and maintain network architecture and data flow diagrams?",
+    "practices": [
+      "Develop and maintain current Network Architecture Diagrams showing all segments, boundaries, and connectivity.",
+      "Create Data Flow Diagrams (DFDs) for all systems processing sensitive or regulated data, identifying data types, storage locations, and transmission paths.",
+      "Update diagrams within 30 days of any significant infrastructure change.",
+      "Review and validate diagrams at least annually and after each major project.",
+      "Store diagrams in a controlled repository accessible to security, IT, and compliance teams."
+    ]
+  },
+  {
+    "id": "ID.AM-04",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How do you track and document the services your organization receives from suppliers?",
+    "practices": [
+      "Maintain a Supplier Services Inventory linking each service to the supplying vendor, service type, data classification, and contract reference.",
+      "Update the inventory when new supplier services are onboarded or existing ones are modified or terminated.",
+      "Include supplier services in the overall asset classification and risk assessment processes.",
+      "Review the inventory at least annually and reconcile against active contracts.",
+      "Use the inventory to inform supply chain risk assessments and business continuity planning."
+    ]
+  },
+  {
+    "id": "ID.AM-05",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How does your organization classify and prioritize assets based on risk and mission impact?",
+    "practices": [
+      "Implement a Data and Asset Classification Policy with defined tiers (e.g., Public, Internal, Confidential, Restricted) based on sensitivity and regulatory requirements.",
+      "Assign criticality ratings to all hardware and software assets based on their role in supporting mission-critical functions.",
+      "Integrate asset criticality into risk assessments, patch management prioritization, and backup procedures.",
+      "Review and revalidate asset classifications at least annually.",
+      "Ensure asset owners are responsible for classifying assets under their control and updating classifications as needed. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 17 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "ID.AM-07",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How do you inventory and track data holdings and their associated metadata?",
+    "practices": [
+      "Implement a Data Inventory (also known as a Record of Processing Activities or ROPA under privacy law) documenting data types, sources, storage locations, retention periods, and owners.",
+      "Use data discovery tools to scan repositories, databases, and cloud storage for sensitive data types.",
+      "Classify data in the inventory according to the organization's data classification policy.",
+      "Update the data inventory when new data flows are created, modified, or decommissioned.",
+      "Use the data inventory to support privacy impact assessments, data subject rights requests, and breach notifications."
+    ]
+  },
+  {
+    "id": "ID.AM-08",
+    "function": "IDENTIFY",
+    "category": "ID.AM",
+    "question": "How do you manage the complete lifecycle of technology assets from acquisition to",
+    "practices": [
+      "Develop a Technology Lifecycle Management Policy covering procurement, deployment, maintenance, and decommissioning standards.",
+      "Track asset lifecycle status in the CMDB, flagging assets approaching end-of-support or end-of-life.",
+      "Require security reviews at key lifecycle milestones (acquisition, major upgrades, decommission).",
+      "Establish secure data destruction procedures (e.g., NIST SP 800-88) for storage media before disposal.",
+      "Remove decommissioned assets from all inventories, access control systems, and network registries within a defined timeframe. The cybersecurity risk to the organization, assets, and individuals is understood."
+    ]
+  },
+  {
+    "id": "ID.IM-01",
+    "function": "IDENTIFY",
+    "category": "ID.IM",
+    "question": "How does your organization identify improvement opportunities from audits and assessments?",
+    "practices": [
+      "Conduct internal cybersecurity audits at least annually, producing findings tied to specific CSF subcategories.",
+      "Commission external assessments or penetration tests at least annually to independently validate controls.",
+      "Track all audit findings in an Issue Register with owner, remediation action, and target closure date.",
+      "Report assessment findings and improvement trends to the CISO and risk committee quarterly.",
+      "Close all high and critical findings within defined SLAs (e.g., 30 days for critical, 90 days for high)."
+    ]
+  },
+  {
+    "id": "ID.IM-02",
+    "function": "IDENTIFY",
+    "category": "ID.IM",
+    "question": "How do you extract improvement actions from security tests and exercises?",
+    "practices": [
+      "Conduct tabletop exercises, red team engagements, or simulated phishing campaigns at least annually.",
+      "Produce After-Action Reports (AARs) following each exercise documenting gaps identified, lessons learned, and recommended improvements.",
+      "Include supplier participation in exercises at least annually for critical supply chain scenarios.",
+      "Track exercise findings in the same Issue Register as audit findings, with owners and deadlines.",
+      "Validate that previous exercise findings have been addressed before conducting the next exercise of the same type."
+    ]
+  },
+  {
+    "id": "ID.IM-03",
+    "function": "IDENTIFY",
+    "category": "ID.IM",
+    "question": "How do day-to-day operations feed into ongoing cybersecurity improvement?",
+    "practices": [
+      "Establish a continuous improvement feedback loop where operational teams (SOC, IT, IR) can submit improvement suggestions through a formal channel.",
+      "Review operational metrics (e.g., alert volumes, false positive rates, ticket resolution times) monthly for signs of process inefficiency.",
+      "Include operational improvement items in the quarterly security program review. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 22 Source: NIST CSWP 29 (February 2024)",
+      "Require post-incident reviews following all significant incidents, with action items tracked to closure.",
+      "Recognize and reward operational staff contributions to security improvement to encourage a culture of continuous learning."
+    ]
+  },
+  {
+    "id": "ID.IM-04",
+    "function": "IDENTIFY",
+    "category": "ID.IM",
+    "question": "How are incident response and other operational cybersecurity plans developed, maintained, and",
+    "practices": [
+      "Maintain a formal Incident Response Plan (IRP) covering detection, containment, eradication, recovery, and post-incident review, approved by the CISO.",
+      "Review and update the IRP at least annually and within 30 days of any significant incident or organizational change.",
+      "Communicate the IRP to all relevant personnel and ensure key responders can access it during an incident (including offline copies).",
+      "Test the IRP through tabletop exercises at least annually and through simulated incident scenarios at least every two years.",
+      "Maintain companion plans (BCP, DRP, Communication Plan) aligned with the IRP and tested on the same cadence. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 23 Source: NIST CSWP 29 (February 2024) Safeguards to manage the organization's cybersecurity risks are used. Access to physical and logical assets is limited to authorized users, services, and hardware and managed commensurate with assessed risk."
+    ]
+  },
+  {
+    "id": "ID.RA-01",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How does your organization identify and document asset vulnerabilities?",
+    "practices": [
+      "Deploy an automated vulnerability scanning solution (e.g., Tenable, Qualys) configured to scan all in-scope assets at least monthly.",
+      "Conduct authenticated scans for more complete visibility into installed software and configuration weaknesses.",
+      "Validate scanner findings by correlating with vendor advisories and CVE databases before recording.",
+      "Log all confirmed vulnerabilities in a centralized Vulnerability Register with asset owner, severity, and remediation deadline. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 18 Source: NIST CSWP 29 (February 2024)",
+      "Prioritize vulnerabilities using CVSS scores combined with asset criticality and threat context (e.g., EPSS scores)."
+    ]
+  },
+  {
+    "id": "ID.RA-02",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "What threat intelligence sources does your organization subscribe to and how is intelligence used?",
+    "practices": [
+      "Subscribe to at least two credible threat intelligence sources relevant to your industry (e.g., sector ISACs, CISA alerts, vendor advisories, commercial TI feeds).",
+      "Designate an individual or team responsible for consuming, evaluating, and distributing threat intelligence.",
+      "Integrate threat intelligence into the vulnerability management, incident detection, and risk assessment processes.",
+      "Participate in information sharing communities (e.g., ISACs, ISAO, government sharing programs) appropriate to your sector.",
+      "Document how threat intelligence influenced security decisions in risk register updates and operational logs."
+    ]
+  },
+  {
+    "id": "ID.RA-03",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How do you systematically identify and document threats to your organization?",
+    "practices": [
+      "Conduct an annual Threat Assessment covering both external threats (nation-state actors, cybercriminals, hacktivists) and internal threats (malicious insiders, accidental data loss).",
+      "Use threat modeling techniques (e.g., STRIDE, PASTA) when designing or assessing new systems.",
+      "Maintain a Threat Register updated after each assessment and when new threat intelligence is received.",
+      "Cross-reference identified threats against asset inventory and vulnerability data to prioritize response.",
+      "Include supply chain threats and threats to critical dependencies in the assessment scope."
+    ]
+  },
+  {
+    "id": "ID.RA-04",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How do you assess and document the likelihood and impact of identified threats?",
+    "practices": [
+      "Use the standardized risk scoring methodology (from GV.RM-06) to assess each threat\u2013vulnerability pair on both likelihood and impact dimensions.",
+      "Document impact in terms of confidentiality, integrity, availability, safety, financial, reputational, and regulatory consequences.",
+      "Engage business owners in impact estimation to ensure operational context is reflected.",
+      "Record likelihood and impact ratings in the risk register alongside supporting rationale. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 19 Source: NIST CSWP 29 (February 2024)",
+      "Update likelihood and impact assessments when new threat intelligence or vulnerability data materially changes the risk picture."
+    ]
+  },
+  {
+    "id": "ID.RA-05",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How does your risk assessment output drive prioritization of risk response activities?",
+    "practices": [
+      "Produce an Inherent Risk Heat Map from assessment data, ranking risks by combined likelihood and impact scores.",
+      "Use risk rankings to prioritize remediation, resource allocation, and security investment decisions.",
+      "Present risk prioritization results to the risk committee and CISO at least quarterly.",
+      "Document and justify prioritization decisions, especially when resource constraints require accepting higher-ranked risks.",
+      "Update prioritization dynamically when new critical vulnerabilities or threat intelligence changes the risk landscape."
+    ]
+  },
+  {
+    "id": "ID.RA-06",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How does your organization select, plan, and track responses to identified risks?",
+    "practices": [
+      "For each risk in the register, assign a response type (mitigate, accept, transfer, avoid) with documented rationale.",
+      "Create remediation plans with specific actions, owners, and target dates for all risks where mitigation is chosen.",
+      "Track remediation progress through a centralized risk register or GRC tool with monthly status updates.",
+      "Report risk response progress to the CISO and relevant stakeholders at least monthly.",
+      "Escalate overdue or stalled remediation items to the risk committee and record decisions taken."
+    ]
+  },
+  {
+    "id": "ID.RA-07",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How does your change management process integrate cybersecurity risk assessment?",
+    "practices": [
+      "Require a Security Impact Assessment (SIA) for all changes to production systems, infrastructure, or critical data flows before implementation.",
+      "Integrate the SIA step into the formal Change Management Process (e.g., CAB approval).",
+      "Document exceptions to security requirements with risk acceptance, approver signature, and expiration date.",
+      "Track all approved exceptions in the risk register and review them at least quarterly.",
+      "Revoke exceptions when they expire or when the risk context changes materially. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 20 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "ID.RA-08",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How does your organization handle externally reported vulnerabilities?",
+    "practices": [
+      "Establish a Vulnerability Disclosure Policy (VDP) published on your website, providing a clear channel for researchers to report vulnerabilities.",
+      "Designate a security team contact responsible for triaging incoming disclosures within 5 business days.",
+      "Acknowledge receipt of disclosures to reporters, provide timeline commitments, and communicate remediation outcomes.",
+      "Integrate disclosed vulnerabilities into the internal vulnerability management process for prioritization and patching.",
+      "Consider a Bug Bounty Program for organizations with higher-profile attack surfaces."
+    ]
+  },
+  {
+    "id": "ID.RA-09",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "How does your organization verify the integrity and authenticity of hardware and software before",
+    "practices": [
+      "Require vendors to provide cryptographic checksums or signatures for all delivered software, and verify these before installation.",
+      "Establish a hardware verification procedure for critical components, including inspection for tampering and validation against vendor specifications.",
+      "Maintain an approved vendor list and prohibit procurement of hardware and software outside established procurement channels.",
+      "Check hardware and software against known bad lists (e.g., CISA's Known Exploited Vulnerabilities catalog, supplier integrity databases).",
+      "Document integrity verification steps in procurement and deployment runbooks."
+    ]
+  },
+  {
+    "id": "ID.RA-10",
+    "function": "IDENTIFY",
+    "category": "ID.RA",
+    "question": "What security due diligence do you require before acquiring products or services from critical",
+    "practices": [
+      "Perform pre-acquisition due diligence (security questionnaire, certifications review, and reference checks) for all critical or high-risk suppliers before contract award.",
+      "Engage a third-party assessor for the highest-risk supplier relationships.",
+      "Review the supplier's breach history, financial stability, and regulatory compliance standing before onboarding.",
+      "Obtain and review available independent audit reports (SOC 2 Type II, ISO 27001 certificates) as part of due diligence. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 21 Source: NIST CSWP 29 (February 2024)",
+      "Document all due diligence findings and obtain CISO sign-off before proceeding with critical supplier acquisitions. Improvements to organizational cybersecurity risk management processes, procedures, and activities are identified across all CSF Functions."
+    ]
+  },
+  {
+    "id": "PR.AA-01",
+    "function": "PROTECT",
+    "category": "PR.AA",
+    "question": "How does your organization manage user, service, and device identities and credentials?",
+    "practices": [
+      "Implement an Identity and Access Management (IAM) system as the authoritative source for all user, service account, and device identities.",
+      "Enforce a password policy requiring minimum length (16+ characters for privileged, 12+ for standard), complexity, and no password reuse within the last 12 cycles.",
+      "Assign unique identifiers to all users and service accounts; prohibit shared or generic accounts.",
+      "Review and recertify all active accounts at least semi-annually, removing dormant accounts within 30 days.",
+      "Maintain a full audit trail of account creation, modification, and deletion."
+    ]
+  },
+  {
+    "id": "PR.AA-02",
+    "function": "PROTECT",
+    "category": "PR.AA",
+    "question": "How do you verify identity before issuing credentials?",
+    "practices": [
+      "Implement identity proofing proportionate to role risk \u2014 privileged accounts require stronger verification (e.g., government ID, in-person or video verification).",
+      "Bind verified identities to credentials using PKI certificates, hardware tokens, or FIDO2 authenticators for high-assurance contexts.",
+      "Document identity proofing procedures in the IAM policy and align with applicable standards (e.g., NIST SP 800-63).",
+      "Require re-proofing when there are signals of identity compromise or significant role changes.",
+      "Log identity proofing events for audit purposes. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 24 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "PR.AA-03",
+    "function": "PROTECT",
+    "category": "PR.AA",
+    "question": "What authentication mechanisms does your organization use for users, services, and devices?",
+    "practices": [
+      "Enforce Multi-Factor Authentication (MFA) for all user access to corporate systems, especially remote access, email, and administrative interfaces.",
+      "Require MFA using phishing-resistant methods (FIDO2/WebAuthn, smart cards) for privileged accounts and high-sensitivity systems.",
+      "Authenticate service accounts using certificates, managed identities, or secrets management vaults rather than static passwords.",
+      "Authenticate devices using certificates or device compliance checks before granting network access (e.g., via NAC or Zero Trust architecture).",
+      "Disable or remediate accounts with MFA disabled within 24 hours of detection."
+    ]
+  },
+  {
+    "id": "PR.AA-04",
+    "function": "PROTECT",
+    "category": "PR.AA",
+    "question": "How do you protect identity tokens and assertions during transmission and verification?",
+    "practices": [
+      "Use industry-standard protocols (OAuth 2.0, SAML 2.0, OIDC) for conveying identity assertions between systems.",
+      "Encrypt all identity tokens in transit using TLS 1.2 or higher.",
+      "Validate token signatures and expiration times in all relying party applications.",
+      "Implement short-lived tokens (e.g., access tokens expiring in 15\u201360 minutes) with secure refresh mechanisms.",
+      "Monitor for token theft and replay attacks using anomaly detection on authentication logs."
+    ]
+  },
+  {
+    "id": "PR.AA-05",
+    "function": "PROTECT",
+    "category": "PR.AA",
+    "question": "How is access control enforced using least privilege and separation of duties?",
+    "practices": [
+      "Implement a formal Access Control Policy mandating least privilege \u2014 all users and systems receive only the minimum access required for their role.",
+      "Enforce separation of duties for sensitive functions (e.g., finance approvals, system administration, security oversight) by preventing the same individual from holding conflicting roles.",
+      "Conduct formal access recertification campaigns at least quarterly for privileged accounts and annually for standard users.",
+      "Use Role-Based Access Control (RBAC) or Attribute-Based Access Control (ABAC) to scale access management consistently. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 25 Source: NIST CSWP 29 (February 2024)",
+      "Automate access provisioning and de-provisioning through integration with HR systems to eliminate orphaned accounts."
+    ]
+  },
+  {
+    "id": "PR.AA-06",
+    "function": "PROTECT",
+    "category": "PR.AA",
+    "question": "How do you control and monitor physical access to your facilities and IT assets?",
+    "practices": [
+      "Deploy electronic access control systems (e.g., badge readers, biometric controls) for all sensitive areas (data centres, server rooms, secure offices).",
+      "Grant physical access on a need-to-enter basis and review physical access privileges at least semi-annually.",
+      "Monitor physical access through CCTV and access logs; review logs when incidents or anomalies are suspected.",
+      "Issue visitor management procedures requiring visitor registration, escort, and badge return.",
+      "Secure portable devices (laptops, USB drives) containing sensitive data with encryption and physical locking mechanisms. The organization's personnel are provided with cybersecurity awareness and training so that they can perform their cybersecurity-related tasks."
+    ]
+  },
+  {
+    "id": "PR.AT-01",
+    "function": "PROTECT",
+    "category": "PR.AT",
+    "question": "What cybersecurity awareness training program does your organization provide to all staff?",
+    "practices": [
+      "Deliver mandatory annual cybersecurity awareness training to 100% of staff, covering phishing, social engineering, password hygiene, data handling, and incident reporting.",
+      "Supplement annual training with monthly security awareness reminders (e.g., newsletters, Slack messages, simulated phishing).",
+      "Track completion rates through an LMS and follow up with non-completers within 30 days of the training deadline.",
+      "Tailor training content to reflect current threats and organizational-specific risks (e.g., PIPEDA/PHIPA obligations for Canadian organizations).",
+      "Test knowledge retention through periodic assessments; trigger remedial training for staff scoring below defined thresholds. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 26 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "PR.AT-02",
+    "function": "PROTECT",
+    "category": "PR.AT",
+    "question": "How do you provide role-specific cybersecurity training to specialized staff?",
+    "practices": [
+      "Identify all roles with elevated security responsibilities (developers, system administrators, incident responders, privacy officers, executives) and define role-specific training requirements.",
+      "Require developers to complete secure coding training (e.g., OWASP Top 10) at hire and annually.",
+      "Require IT administrators to complete privileged access management and hardening training annually.",
+      "Require executives and board members to attend cybersecurity leadership briefings at least annually.",
+      "Document role-specific training requirements in job descriptions and track completion in the LMS. Data are managed consistent with the organization's risk strategy to protect confidentiality, integrity, and availability of information."
+    ]
+  },
+  {
+    "id": "PR.DS-01",
+    "function": "PROTECT",
+    "category": "PR.DS",
+    "question": "How do you protect data stored on systems and media?",
+    "practices": [
+      "Encrypt all sensitive data at rest using AES-256 or equivalent, including on laptops, servers, databases, and cloud storage.",
+      "Apply data classification labels and enforce handling controls aligned to each classification level.",
+      "Implement database activity monitoring (DAM) for databases containing sensitive or regulated data.",
+      "Use access controls to restrict data-at-rest to authorized users and processes only.",
+      "Test encryption implementations and storage access controls through annual security assessments."
+    ]
+  },
+  {
+    "id": "PR.DS-02",
+    "function": "PROTECT",
+    "category": "PR.DS",
+    "question": "How is data protected during transmission?",
+    "practices": [
+      "Enforce TLS 1.2 or higher for all data transmitted over untrusted networks, including internet-facing APIs, web applications, and email.",
+      "Prohibit the use of unencrypted protocols (HTTP, FTP, Telnet) for transmitting sensitive data.",
+      "Implement certificate management practices, including monitoring certificate expiry and enforcing certificate pinning for critical applications.",
+      "Use email encryption or secure file transfer solutions for sensitive communications with external parties.",
+      "Regularly scan for cleartext transmission of sensitive data using network monitoring tools. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 27 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "PR.DS-10",
+    "function": "PROTECT",
+    "category": "PR.DS",
+    "question": "How do you protect data while it is being actively processed?",
+    "practices": [
+      "Implement memory protection mechanisms and avoid logging sensitive data values in application logs.",
+      "Apply application-layer access controls to ensure data is only processed by authorized components and users.",
+      "Use Data Loss Prevention (DLP) tools to detect and prevent unauthorized copying or exfiltration of sensitive data during use.",
+      "Apply runtime application self-protection (RASP) or similar controls for high-risk applications.",
+      "Conduct application security testing (SAST/DAST) to identify vulnerabilities that could expose data in use."
+    ]
+  },
+  {
+    "id": "PR.DS-11",
+    "function": "PROTECT",
+    "category": "PR.DS",
+    "question": "What is your data backup strategy and how do you validate it?",
+    "practices": [
+      "Define and implement a backup policy covering: backup frequency (daily for critical data), retention periods, offsite or cloud storage, and encryption of backup media.",
+      "Apply the 3-2-1 backup rule: 3 copies, 2 different media types, 1 offsite/cloud.",
+      "Encrypt all backup data using the same or stronger standards as production data.",
+      "Test backup restoration at least quarterly for critical systems and annually for all systems; document and retain test results.",
+      "Protect backups from ransomware using immutable storage, air-gapped copies, or append-only cloud storage configurations. The hardware, software, and services of physical and virtual platforms are managed consistent with the organization's risk strategy."
+    ]
+  },
+  {
+    "id": "PR.IR-01",
+    "function": "PROTECT",
+    "category": "PR.IR",
+    "question": "How do you prevent unauthorized access to your networks and computing environments?",
+    "practices": [
+      "Implement network segmentation using VLANs, firewalls, and micro-segmentation to isolate sensitive systems.",
+      "Deploy a Next-Generation Firewall (NGFW) with deny-all default rules and explicit permit rules for approved traffic.",
+      "Enforce Zero Trust Network Access (ZTNA) principles: verify identity, validate device posture, and apply least-privilege access before granting network access. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 30 Source: NIST CSWP 29 (February 2024)",
+      "Implement Network Access Control (NAC) to prevent unauthorized or non-compliant devices from connecting to the network.",
+      "Conduct firewall rule reviews at least semi-annually, removing unused or overly permissive rules."
+    ]
+  },
+  {
+    "id": "PR.IR-02",
+    "function": "PROTECT",
+    "category": "PR.IR",
+    "question": "What environmental controls protect your physical infrastructure?",
+    "practices": [
+      "Ensure data centres and server rooms are equipped with climate control (temperature and humidity), fire suppression, and water/flood detection systems.",
+      "Implement Uninterruptible Power Supplies (UPS) and generator backup for critical systems to maintain uptime during power outages.",
+      "Conduct annual facility physical security assessments covering all environmental control systems.",
+      "Implement redundant utility feeds where feasible for critical facilities.",
+      "Test environmental monitoring systems and backup power quarterly."
+    ]
+  },
+  {
+    "id": "PR.IR-03",
+    "function": "PROTECT",
+    "category": "PR.IR",
+    "question": "How does your organization achieve system and operational resilience?",
+    "practices": [
+      "Define Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) for all critical systems, aligned with business continuity requirements.",
+      "Implement high-availability configurations (clustering, failover, load balancing) for mission-critical systems.",
+      "Establish and test disaster recovery environments capable of meeting defined RTO/RPO targets.",
+      "Conduct Business Continuity Plan (BCP) exercises at least annually, including failover to DR environments.",
+      "Review and update resilience requirements and configurations annually or after significant infrastructure changes."
+    ]
+  },
+  {
+    "id": "PR.IR-04",
+    "function": "PROTECT",
+    "category": "PR.IR",
+    "question": "How do you monitor and manage system capacity to ensure continued availability?",
+    "practices": [
+      "Implement capacity monitoring across all critical systems, tracking CPU, memory, storage, and network bandwidth utilization.",
+      "Define capacity thresholds (e.g., alert at 80% utilization) and automate alerting when thresholds are reached.",
+      "Conduct quarterly capacity planning reviews, projecting growth 6\u201312 months forward.",
+      "Implement auto-scaling for cloud workloads to handle demand spikes without manual intervention. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 31 Source: NIST CSWP 29 (February 2024)",
+      "Budget for capacity upgrades proactively, avoiding resource contention that could degrade availability. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 32 Source: NIST CSWP 29 (February 2024) Possible cybersecurity attacks and compromises are found and analyzed. Assets are monitored to find anomalies, indicators of compromise, and other potentially adverse events."
+    ]
+  },
+  {
+    "id": "PR.PS-01",
+    "function": "PROTECT",
+    "category": "PR.PS",
+    "question": "How does your organization manage secure configurations for systems and devices?",
+    "practices": [
+      "Develop and maintain Security Baselines (hardening standards) for all major platforms (Windows, Linux, macOS, cloud, network devices) aligned to CIS Benchmarks or NIST SP 800-70.",
+      "Apply baseline configurations to all new deployments before production use through automated provisioning (e.g., Ansible, Terraform).",
+      "Scan for configuration drift at least monthly using CIS-CAT, Lynis, or equivalent tools. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 28 Source: NIST CSWP 29 (February 2024)",
+      "Track configuration deviations in the vulnerability management system and remediate critical deviations within 30 days.",
+      "Review and update baselines annually or when vendors release significant changes."
+    ]
+  },
+  {
+    "id": "PR.PS-02",
+    "function": "PROTECT",
+    "category": "PR.PS",
+    "question": "How does your patch management program address software vulnerabilities?",
+    "practices": [
+      "Establish a Patch Management Policy defining patching windows and SLAs by severity: Critical (\u22647 days), High (\u226430 days), Medium (\u226490 days), Low (\u2264180 days).",
+      "Use automated patch management tools (WSUS, MECM, Jamf) to deploy patches at scale.",
+      "Prioritize patching of actively exploited vulnerabilities using CISA KEV and EPSS scores.",
+      "Remove or replace software that reaches end-of-life without extended support and cannot be patched.",
+      "Maintain a patch compliance dashboard and report patch rates to the CISO monthly."
+    ]
+  },
+  {
+    "id": "PR.PS-03",
+    "function": "PROTECT",
+    "category": "PR.PS",
+    "question": "How do you manage the lifecycle and secure disposal of hardware assets?",
+    "practices": [
+      "Track hardware asset lifecycle status (warranty, support, EOL) in the CMDB and plan replacements before support expires.",
+      "Establish procedures for secure data destruction on decommissioned hardware per NIST SP 800-88 (overwrite, degauss, or physical destruction).",
+      "Require third-party certified data sanitization for media containing sensitive data disposed through vendors.",
+      "Maintain destruction certificates as audit evidence for all media disposals.",
+      "Budget for hardware refresh cycles to avoid reliance on unsupported equipment in production."
+    ]
+  },
+  {
+    "id": "PR.PS-04",
+    "function": "PROTECT",
+    "category": "PR.PS",
+    "question": "What logging standards does your organization enforce to support monitoring and forensics?",
+    "practices": [
+      "Define a Logging Policy specifying which systems must log, what events to capture (authentication, access, changes, errors), log format, and retention period.",
+      "Centralize logs in a Security Information and Event Management (SIEM) system with tamper-evident storage.",
+      "Retain security logs for at least 12 months (hot/searchable) and 24 months total (archived), adjusting for regulatory requirements.",
+      "Synchronize system clocks using NTP to ensure consistent timestamps across all log sources.",
+      "Test log completeness and SIEM ingestion monthly by validating known test events appear in the SIEM. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 29 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "PR.PS-05",
+    "function": "PROTECT",
+    "category": "PR.PS",
+    "question": "How do you prevent unauthorized software from running on organizational systems?",
+    "practices": [
+      "Implement application whitelisting or application control policies (e.g., Windows Defender Application Control, AppLocker) on servers and endpoints.",
+      "Block execution of unsigned or untrusted code, including scripts and macros, on production systems.",
+      "Configure endpoint protection platforms (EPP/EDR) to detect and block unauthorized software installation.",
+      "Alert and investigate any unauthorized software execution attempts within 24 hours of detection.",
+      "Maintain an approved software list reviewed and updated quarterly."
+    ]
+  },
+  {
+    "id": "PR.PS-06",
+    "function": "PROTECT",
+    "category": "PR.PS",
+    "question": "How do you embed security into your software development lifecycle (SDLC)?",
+    "practices": [
+      "Adopt a Secure Software Development Lifecycle (S-SDLC) framework (e.g., NIST SSDF, OWASP SAMM) covering security requirements, design review, secure coding, testing, and deployment.",
+      "Perform Static Application Security Testing (SAST) on all code commits using automated scanning tools integrated into the CI/CD pipeline.",
+      "Conduct Dynamic Application Security Testing (DAST) and Software Composition Analysis (SCA) before major releases.",
+      "Require peer code review with security checklist completion before merging into production branches.",
+      "Track and report SDLC security metrics (vulnerability density, time to fix, training completion) to engineering leadership monthly. Security architectures are managed to protect asset confidentiality, integrity, availability, and organizational resilience."
+    ]
+  },
+  {
+    "id": "RC.CO-03",
+    "function": "RECOVER",
+    "category": "RC.CO",
+    "question": "How do you communicate recovery progress to stakeholders during and after an incident?",
+    "practices": [
+      "Establish a Communication Plan within the IRP specifying: who to communicate with, what to communicate, through which channel, and how frequently during recovery.",
+      "Designate a Communications Lead responsible for all internal and external messaging during recovery.",
+      "Provide status updates to executives at least every 4 hours during active recovery; adjust to daily once stable.",
+      "For externally visible incidents, provide customer-facing updates through the trust portal or status page on an agreed cadence.",
+      "Archive all communications for post-incident review and potential regulatory evidence."
+    ]
+  },
+  {
+    "id": "RC.CO-04",
+    "function": "RECOVER",
+    "category": "RC.CO",
+    "question": "How do you manage and approve public communications about a cybersecurity incident?",
+    "practices": [
+      "Require all public statements about cybersecurity incidents to be reviewed and approved by legal counsel and the CISO before release.",
+      "Develop pre-approved communication templates for common incident types to accelerate response without sacrificing accuracy.",
+      "Designate a single authorized spokesperson for all public communications to maintain consistent messaging.",
+      "Coordinate public statements with regulatory notifications to avoid contradictions.",
+      "Document the content, timing, and approval chain for all public communications in the incident record. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 45 Source: NIST CSWP 29 (February 2024) Primary Reference: National Institute of Standards and Technology. (2024). The NIST Cybersecurity Framework (CSF) 2.0 (NIST CSWP 29). https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf CSF Tools Reference: https://csf.tools/framework/csf-v2-0/"
+    ]
+  },
+  {
+    "id": "RC.RP-01",
+    "function": "RECOVER",
+    "category": "RC.RP",
+    "question": "How is the recovery phase of the incident response plan activated and managed?",
+    "practices": [
+      "Maintain a documented Recovery Plan within the IRP, distinct from the containment/eradication phases, with step-by-step restoration procedures.",
+      "Designate a Recovery Coordinator (typically the IT/Operations lead) responsible for executing recovery activities.",
+      "Prioritize recovery of critical systems based on the BIA-derived criticality rankings.",
+      "Brief all relevant stakeholders when recovery is initiated, including estimated restoration timelines.",
+      "Log all recovery activities with timestamps in the incident record."
+    ]
+  },
+  {
+    "id": "RC.RP-02",
+    "function": "RECOVER",
+    "category": "RC.RP",
+    "question": "How do you prioritize and execute recovery actions across affected systems?",
+    "practices": [
+      "Use the BIA criticality rankings to determine recovery order: restore most critical systems first.",
+      "Select recovery methods (bare-metal restore, snapshot rollback, clean rebuild) based on the system's configuration management state and RTO requirements.",
+      "Confirm recovery scope with business owners before beginning restoration to avoid restoring compromised state.",
+      "Track each recovery action item in the incident ticket with owner, status, and completion time.",
+      "Communicate recovery progress to executives and affected business units at regular intervals (at minimum every 4 hours during active recovery). NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 43 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "RC.RP-03",
+    "function": "RECOVER",
+    "category": "RC.RP",
+    "question": "How do you validate that backups are clean and trustworthy before restoring from them?",
+    "practices": [
+      "Before restoring from backup, verify cryptographic hash values match those recorded at backup time.",
+      "Scan backup data with updated antimalware tools before restoring to production environments.",
+      "If available, select backup restore points that pre-date the earliest known compromise time by a safe margin.",
+      "Test restored backups in an isolated environment before connecting them to the production network.",
+      "Document backup verification steps and findings in the incident record."
+    ]
+  },
+  {
+    "id": "RC.RP-04",
+    "function": "RECOVER",
+    "category": "RC.RP",
+    "question": "How do you redefine operational norms to account for residual risk after an incident?",
+    "practices": [
+      "Conduct a Post-Incident Risk Review to assess whether the incident revealed permanent changes to the risk landscape that require adjusted controls or procedures.",
+      "Implement enhanced monitoring on recovered systems for at least 30 days post-incident.",
+      "Update risk register entries based on lessons learned from the incident.",
+      "Define any temporary compensating controls needed until permanent fixes are implemented.",
+      "Communicate revised operational norms to affected teams before transitioning to normal operations."
+    ]
+  },
+  {
+    "id": "RC.RP-05",
+    "function": "RECOVER",
+    "category": "RC.RP",
+    "question": "How do you confirm that recovered systems are fully restored and functioning correctly?",
+    "practices": [
+      "Define acceptance criteria for system restoration (e.g., all services running, no active IoCs, vulnerability patched, logs flowing to SIEM).",
+      "Conduct functional testing of restored systems before returning them to production use.",
+      "Validate that restored systems pass security baseline compliance scans before production acceptance.",
+      "Obtain formal sign-off from the system owner and CISO before declaring system restoration complete.",
+      "Document restoration verification results in the incident record."
+    ]
+  },
+  {
+    "id": "RC.RP-06",
+    "function": "RECOVER",
+    "category": "RC.RP",
+    "question": "How is the formal end of an incident declared and documented?",
+    "practices": [
+      "Define incident closure criteria: all systems restored, no active threats remaining, all notifications completed, all immediate remediation actions addressed. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 44 Source: NIST CSWP 29 (February 2024)",
+      "Require Incident Commander sign-off on the closure criteria checklist before declaring incident end.",
+      "Complete all incident documentation within 5 business days of incident closure, including the full timeline, root cause, and lessons learned.",
+      "Conduct a formal Post-Incident Review (PIR) within 14 days of closure for significant incidents, with representatives from all involved teams.",
+      "Track PIR action items in the Issue Register to closure and report progress to the risk committee. Restoration activities are coordinated with internal and external parties."
+    ]
+  },
+  {
+    "id": "RS.AN-03",
+    "function": "RESPOND",
+    "category": "RS.AN",
+    "question": "How do you conduct root cause analysis during and after a cybersecurity incident?",
+    "practices": [
+      "Assign a lead analyst or forensic investigator to each significant incident, responsible for establishing the timeline, attack vector, and root cause.",
+      "Use the MITRE ATT&CK; framework to map adversary TTPs and identify the full attack chain.",
+      "Preserve forensic evidence (disk images, memory captures, log extracts) before taking remediation actions wherever possible.",
+      "Document the incident timeline and root cause in a formal Incident Analysis Report completed within 5 business days of containment for significant incidents.",
+      "Share root cause findings with relevant teams (IT, DevOps, procurement) to drive systemic remediation."
+    ]
+  },
+  {
+    "id": "RS.AN-06",
+    "function": "RESPOND",
+    "category": "RS.AN",
+    "question": "How do you maintain a tamper-evident record of investigation activities?",
+    "practices": [
+      "Log all investigation activities in the incident management system with timestamps, analyst identity, and action description.",
+      "Store forensic evidence in a chain-of-custody-controlled repository with access restricted to authorized investigators.",
+      "Use write-once or append-only storage for investigation logs where regulatory or legal requirements apply.",
+      "Apply cryptographic hashing (SHA-256) to forensic evidence files at collection time and verify integrity before analysis.",
+      "Train responders on evidence handling procedures and chain-of-custody documentation."
+    ]
+  },
+  {
+    "id": "RS.AN-07",
+    "function": "RESPOND",
+    "category": "RS.AN",
+    "question": "What processes ensure incident evidence is collected and preserved properly?",
+    "practices": [
+      "Define an Evidence Collection Procedure specifying what to collect (logs, disk images, memory dumps, network captures), in what order, and how to document provenance.",
+      "Use forensic collection tools (e.g., FTK Imager, Velociraptor) that create integrity-verified artifacts.",
+      "Store collected data in segregated, access-controlled evidence repositories.",
+      "Label all evidence with: incident ID, collection time, collector identity, and hash values. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 40 Source: NIST CSWP 29 (February 2024)",
+      "Retain incident evidence per the Incident Evidence Retention Policy (minimum 12 months for significant incidents, longer if litigation or regulatory investigation is anticipated)."
+    ]
+  },
+  {
+    "id": "RS.AN-08",
+    "function": "RESPOND",
+    "category": "RS.AN",
+    "question": "How do you estimate and validate the true scope and magnitude of a cybersecurity incident?",
+    "practices": [
+      "Perform a scope assessment early in the incident to identify all affected systems, accounts, and data sets.",
+      "Use threat hunting techniques to identify lateral movement, persistence mechanisms, or additional compromise beyond the initial detection point.",
+      "Validate scope estimates using evidence from network flows, EDR telemetry, and authentication logs rather than assumptions.",
+      "Update the magnitude estimate as new evidence emerges throughout the investigation.",
+      "Include magnitude findings in regulatory notifications (if applicable) and post-incident reports. Response activities are coordinated with internal and external stakeholders as required by laws, regulations, or policies."
+    ]
+  },
+  {
+    "id": "RS.CO-02",
+    "function": "RESPOND",
+    "category": "RS.CO",
+    "question": "How do you manage internal and external notifications during a cybersecurity incident?",
+    "practices": [
+      "Maintain a Stakeholder Notification Matrix mapping incident types and severities to required notifications: executives, board, regulators, customers, affected individuals, and law enforcement.",
+      "Prepare pre-approved notification templates for common incident types to accelerate communications.",
+      "Meet regulatory notification deadlines (e.g., breach notification within 72 hours under GDPR; without undue delay under PIPEDA; as soon as reasonably possible under PHIPA).",
+      "Coordinate all external notifications through legal counsel to ensure regulatory compliance.",
+      "Log all notifications (recipient, time, content, method) in the incident record."
+    ]
+  },
+  {
+    "id": "RS.CO-03",
+    "function": "RESPOND",
+    "category": "RS.CO",
+    "question": "How do you securely share incident information with relevant parties during and after an incident?",
+    "practices": [
+      "Define information sharing protocols: what can be shared with whom, through which channels, and subject to what authorization.",
+      "Use secure communication channels (encrypted email, secure portal) for sharing sensitive incident details. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 41 Source: NIST CSWP 29 (February 2024)",
+      "Participate in relevant Information Sharing and Analysis Centres (ISACs) to share sanitized threat data with peer organizations.",
+      "Report meaningful incidents to government/regulatory bodies (e.g., CISA, CCCS, OPC) as required and as beneficial for collective defence.",
+      "Document what was shared with whom and when in the incident record for audit purposes. Activities are performed to prevent expansion of an event and mitigate its effects."
+    ]
+  },
+  {
+    "id": "RS.MA-01",
+    "function": "RESPOND",
+    "category": "RS.MA",
+    "question": "How is the incident response plan activated and coordinated with third parties?",
+    "practices": [
+      "Designate an Incident Commander role responsible for activating the IRP and coordinating all response activities.",
+      "Maintain a Third-Party Contact List (legal counsel, forensics firm, cyber insurer, regulators) updated at least annually.",
+      "Activate third-party support per pre-established retainer agreements within defined time windows based on incident severity.",
+      "Establish communication protocols with critical suppliers and customers for relevant incident scenarios.",
+      "Document all coordination activities in the incident log for post-incident review and potential regulatory reporting."
+    ]
+  },
+  {
+    "id": "RS.MA-02",
+    "function": "RESPOND",
+    "category": "RS.MA",
+    "question": "How does your team triage and validate incoming incident reports?",
+    "practices": [
+      "Define a standardized incident intake form capturing: reporter, description, affected systems, initial severity estimate, and detection time.",
+      "Assign Level 1 SOC analysts to validate all incoming reports against defined incident criteria within the alert SLA.",
+      "Use automated enrichment (SOAR playbooks) to reduce manual triage effort and accelerate initial validation.",
+      "Maintain a false positive tracking mechanism to continuously improve triage accuracy.",
+      "Escalate validated incidents to the appropriate response team within the defined SLA for each severity level. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 38 Source: NIST CSWP 29 (February 2024)"
+    ]
+  },
+  {
+    "id": "RS.MA-03",
+    "function": "RESPOND",
+    "category": "RS.MA",
+    "question": "How do you categorize and prioritize incidents to allocate response resources appropriately?",
+    "practices": [
+      "Implement an incident categorization taxonomy (e.g., malware, unauthorized access, data breach, DoS, phishing) with defined response playbooks for each.",
+      "Use a severity matrix combining impact (data sensitivity, systems affected, business disruption) and urgency to assign incident priority levels (P1\u2013P4).",
+      "Assign dedicated response resources based on incident priority, with P1 (Critical) triggering all-hands response.",
+      "Document categorization and priority decisions in the incident ticket.",
+      "Review categorization accuracy during post-incident reviews and update the taxonomy as new incident types emerge."
+    ]
+  },
+  {
+    "id": "RS.MA-04",
+    "function": "RESPOND",
+    "category": "RS.MA",
+    "question": "What escalation procedures ensure the right leaders are engaged during a significant incident?",
+    "practices": [
+      "Define escalation thresholds in the IRP: which incident conditions require CISO notification, executive notification, board notification, and regulator notification.",
+      "Implement automated escalation triggers in the ITSM system based on incident severity and elapsed time without resolution.",
+      "Maintain 24/7 on-call contacts for the security, IT, and executive teams.",
+      "Document all escalation decisions and the basis for escalation (or non-escalation) in the incident record.",
+      "Conduct post-incident reviews to assess whether escalation decisions were timely and appropriate."
+    ]
+  },
+  {
+    "id": "RS.MA-05",
+    "function": "RESPOND",
+    "category": "RS.MA",
+    "question": "How do you determine when it is safe to initiate recovery from an incident?",
+    "practices": [
+      "Define recovery initiation criteria in the IRP, including: threat eradication confirmed, containment boundaries verified, forensic evidence preserved, and no active adversary persistence.",
+      "Require CISO or Incident Commander sign-off before transitioning from the Eradication phase to Recovery.",
+      "Document the basis for recovery initiation in the incident record, including validation evidence.",
+      "Conduct a brief pre-recovery checklist review to confirm all eradication steps are complete.",
+      "Monitor recovered systems closely during the first 72 hours post-recovery for signs of re-compromise. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 39 Source: NIST CSWP 29 (February 2024) Investigations are conducted to ensure effective response and support forensics and recovery activities."
+    ]
+  },
+  {
+    "id": "RS.MI-01",
+    "function": "RESPOND",
+    "category": "RS.MI",
+    "question": "What containment strategies and procedures does your organization use during an incident?",
+    "practices": [
+      "Document containment options for each incident category in response playbooks (network isolation, account disablement, service shutdown, firewall block).",
+      "Authorize the SOC and IT teams to take immediate containment actions (isolate compromised hosts, block IPs) without waiting for full executive approval for P1/P2 incidents.",
+      "Test containment procedures during tabletop exercises at least annually.",
+      "Document all containment actions with timestamps and rationale in the incident record.",
+      "Re-evaluate containment boundaries as the investigation evolves to prevent re-compromise while minimizing business disruption."
+    ]
+  },
+  {
+    "id": "RS.MI-02",
+    "function": "RESPOND",
+    "category": "RS.MI",
+    "question": "How do you ensure complete removal of threat actors, malware, and unauthorized access during",
+    "practices": [
+      "Define eradication checklists for each incident category, covering: malware removal, compromised credential rotation, backdoor elimination, and vulnerability patching.",
+      "Verify eradication using forensic tools and endpoint telemetry before transitioning to recovery.",
+      "Reset all credentials potentially exposed during the incident, including service accounts and shared credentials.",
+      "Patch or mitigate the exploited vulnerability as part of the eradication phase.",
+      "Document eradication actions and confirmation evidence in the incident record. NIST Cybersecurity Framework 2.0 \u2014 Compliance Q&A | Page 42 Source: NIST CSWP 29 (February 2024) Assets and operations affected by a cybersecurity incident are restored. Restoration activities are performed to ensure operational availability of systems and services affected by cybersecurity incidents."
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "id": "nist_csf_2_0",
+  "name": "NIST CSF 2.0 (Checklist)",
+  "version": "2024-02",
+  "source": {
+    "primary": "NIST CSWP 29 (February 2024)",
+    "derivative": "NIST CSF 2.0 Compliance Q&A PDF (resources)"
+  },
+  "item_count": 106
+}
