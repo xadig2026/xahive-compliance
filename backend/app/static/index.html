@@ -383,6 +383,34 @@
       }
       .readiness-narrative-block .readiness-narr-h { font-size: 10px; }
       .readiness-narrative-block .readiness-narr-ul { font-size: 11px; }
+
+      .readiness-dashboard-footer {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+        text-align: left;
+      }
+      .readiness-dashboard-footer h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+        font-weight: 750;
+        color: var(--text);
+        line-height: 1.35;
+      }
+      .readiness-dashboard-footer p {
+        margin: 0 0 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .readiness-dashboard-footer a {
+        color: var(--primary2);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .readiness-dashboard-footer a:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -427,6 +455,11 @@
           <div class="tiny muted" style="margin-bottom: 14px">Overall score (0–100%) mapped on the gauge: red = lower readiness, yellow = mid, green = higher.</div>
           <div id="readinessGaugeHost" class="readiness-gauge-host"></div>
           <div id="readinessContent" class="tiny" style="margin-top: 8px"></div>
+          <footer class="readiness-dashboard-footer" aria-label="xahive">
+            <h3>Close the Gap Between Cyber Risk Discovery and Implementation</h3>
+            <p>xahive converts cybersecurity self-assessment insights into fully deployed solutions covering compliance, digital transformation, AI/post-quantum risk, strategic leadership, and enterprise security operations.</p>
+            <p class="tiny" style="margin-bottom: 0">Contact <a href="mailto:sem@xahive.ca">sem@xahive.ca</a></p>
+          </footer>
         </div>
         <div id="items"></div>
       </section>
