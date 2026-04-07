@@ -423,7 +423,7 @@
           </div>
         </div>
         <div id="readinessPanel" class="panel pad readiness-dashboard" style="display:none; box-shadow: var(--shadow); background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(247,248,251,0.98) 100%); margin-bottom: 14px; border: 1px solid var(--border)">
-          <div style="font-weight:780; font-size: 18px; margin-bottom: 4px">Readiness dashboard</div>
+          <div style="font-weight:780; font-size: 18px; margin-bottom: 4px">Readiness Dashboard</div>
           <div class="tiny muted" style="margin-bottom: 14px">Overall score (0–100%) mapped on the gauge: red = lower readiness, yellow = mid, green = higher.</div>
           <div id="readinessGaugeHost" class="readiness-gauge-host"></div>
           <div id="readinessContent" class="tiny" style="margin-top: 8px"></div>
@@ -665,8 +665,8 @@
         const label = document.createElement('div');
         label.className = 'readiness-pct-label';
         label.innerHTML = pct != null
-          ? `${pct}<span class="unit">%</span> overall readiness`
-          : '<span class="unit">— overall readiness</span>';
+          ? `${pct}<span class="unit">%</span> Overall Readiness`
+          : '<span class="unit">— Overall Readiness</span>';
         gaugeHost.appendChild(label);
 
         contentEl.innerHTML = '';

@@ -75,7 +75,7 @@ Hard rules (violations are unacceptable):
 1) Use ONLY information in the FACTS_JSON object. Do not invent vendors, products, incidents, regulations, team names, or controls not present there.
 2) Every bullet string MUST contain one or more control identifiers in square brackets copied exactly from FACTS_JSON, e.g. [DE.AE-02]. Only use control_ids listed under "controls".
 3) Do not state percentages or statuses unless they appear for that control in FACTS_JSON.
-4) strengths: only for controls that show strong readiness (e.g. Implemented or high readiness_percent). At most 5 bullets.
+4) strengths: only for controls that show strong readiness (e.g. Implemented or high readiness_percent). At most 5 bullets. Each bullet MUST include: CSF function, category, and a short phrase from the question text for context (not just the control_id).
 5) weaknesses: at most 3 bullets. Each bullet MUST name the CSF function and category from FACTS_JSON (e.g. "DETECT · DE.AE") and briefly reflect the question text — not only the control_id. Only the weakest-gap controls.
 6) priorities: at most 3 bullets, aligned to the same weakest controls as weaknesses where possible; include function, category, and question context; cite [CONTROL_ID].
 7) overall: synthesize across the whole module using the same citation rules (max 5 strengths, max 3 weaknesses, max 3 priorities).

@@ -67,8 +67,9 @@ def template_block_for_controls(controls: list[dict[str, Any]]) -> dict[str, lis
         if p is None:
             continue
         if st == "Implemented" or p >= 85.0:
+            q = _truncate(c.get("question") or "", 160)
             strengths.append(
-                f"{_section_label(c)} — strong signal from status and score ({p}% readiness). [{cid}]"
+                f'{_section_label(c)}: "{q}" — strong signal from status and score ({p}% readiness). [{cid}]'
             )
 
     if not all_trivial:
@@ -84,7 +85,7 @@ def template_block_for_controls(controls: list[dict[str, Any]]) -> dict[str, lis
                 f'Weakness in {sec}: "{q}" — {p}% readiness, status {st}. [{cid}]'
             )
             priorities.append(
-                f"Improve cybersecurity posture for {sec} by advancing this control (currently {p}% readiness); align practices and attestation with the full question scope. [{cid}]"
+                f'Priority for {sec}: "{q}" — advance this control (currently {p}% readiness) toward full implementation. [{cid}]'
             )
 
     return {
