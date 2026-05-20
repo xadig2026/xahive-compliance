@@ -1170,8 +1170,10 @@
           gaugeHost.innerHTML = '';
           el.innerHTML = `<span class="danger">${e.message}</span>`;
           panel.removeAttribute('data-readiness-loaded');
+          panel.style.display = 'block';
           syncChecklistChromeForDashboard();
           syncChecklistItemVisibility();
+          recoverBlankAssessmentUi();
         }
       }
 
@@ -1393,7 +1395,9 @@
         }
         syncChecklistItemVisibility();
         syncChecklistChromeForDashboard();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (finalAttestationPanel) {
+          finalAttestationPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
 
       function hideFinalAttestationPanel() {
@@ -1527,13 +1531,35 @@
       }
 
       function syncChecklistChromeForDashboard() {
-        const rp = document.getElementById('readinessPanel');
+        const dashboardActive = isDashboardViewActive();
+        const attestationVisible = isFinalAttestationPanelVisible();
         const n = current.items.length;
         const onLast = n > 0 && activeItemIdx === n - 1;
-        const loaded = rp && rp.getAttribute('data-readiness-loaded') === '1';
+        if (checklistTopPanel) checklistTopPanel.style.display = dashboardActive ? 'none' : '';
+        if (assessmentInstructions) assessmentInstructions.style.display = (onLast && (dashboardActive || attestationVisible)) ? 'none' : '';
+      }
+
+      /** Prevent blank page: intro only, with all steps hidden. */
+      function recoverBlankAssessmentUi() {
+        const dashboardActive = isDashboardViewActive();
         const attestationVisible = isFinalAttestationPanelVisible();
-        if (checklistTopPanel) checklistTopPanel.style.display = (onLast && loaded) ? 'none' : '';
-        if (assessmentInstructions) assessmentInstructions.style.display = (onLast && (loaded || attestationVisible)) ? 'none' : '';
+        const n = current.items.length;
+        const onLast = n > 0 && activeItemIdx === n - 1;
+        const itemsHidden = itemsEl && itemsEl.hidden;
+        const topHidden = checklistTopPanel && checklistTopPanel.style.display === 'none';
+        if (!onLast || dashboardActive || attestationVisible) return;
+        if (!itemsHidden && !topHidden) return;
+        if (checklistTopPanel) checklistTopPanel.style.display = '';
+        if (needsFinalAttestationBeforeDashboard()) {
+          if (itemsEl) { itemsEl.innerHTML = ''; itemsEl.hidden = true; }
+          showFinalAttestationPanel();
+        } else {
+          if (itemsEl) itemsEl.hidden = false;
+          if (!itemsEl || !itemsEl.childElementCount) {
+            suppressFinalAttestationResumeOnce = true;
+            renderCurrentQuestion();
+          }
+        }
       }
 
       function previewDashboardRequested() {
@@ -1580,17 +1606,29 @@
         activeItemIdx = items.length - 1;
       }
 
-      /** Hide the last-question card once the readiness dashboard or final attestation step is active. */
+      /** Hide the last-question card only when dashboard or attestation is actually on screen. */
       function syncChecklistItemVisibility() {
         const items = document.getElementById('items');
-        const rp = document.getElementById('readinessPanel');
-        if (!items || !rp) return;
+        if (!items) return;
         const n = current.items.length;
         const onLast = n > 0 && activeItemIdx === n - 1;
-        const loaded = rp.getAttribute('data-readiness-loaded') === '1';
+        const dashboardActive = isDashboardViewActive();
         const attestationVisible = isFinalAttestationPanelVisible();
-        items.hidden = onLast && (loaded || attestationVisible);
+        items.hidden = onLast && (dashboardActive || attestationVisible);
         syncChecklistChromeForDashboard();
+        recoverBlankAssessmentUi();
+      }
+
+      function showBootError(message) {
+        if (bootStatus) {
+          bootStatus.textContent = message;
+          bootStatus.classList.add('danger');
+        }
+        if (checklistTopPanel) checklistTopPanel.style.display = '';
+        if (itemsEl) {
+          itemsEl.hidden = false;
+          itemsEl.innerHTML = `<p class="danger" style="margin:0">${message}</p><p class="tiny muted" style="margin-top:8px">Try <strong>New session</strong> or hard refresh (Ctrl+F5). If this persists, check that the API is reachable at <code>/api/modules</code>.</p>`;
+        }
       }
 
       function findLegacySessionId() {
@@ -1908,6 +1946,8 @@
                 delete rec.final_attestation;
                 saveRecord(current.id, rec);
               } catch (_) {}
+              itemsEl.innerHTML = '';
+              itemsEl.hidden = true;
               showFinalAttestationPanel();
             }
           } catch (e) {
@@ -1966,12 +2006,24 @@
           return;
         }
         hideFinalAttestationPanel();
+        if (!skipResumeAttestation && hasSavedLastControlResponse() && !needsFinalAttestationBeforeDashboard() && activeItemIdx === n - 1 && !isDashboardViewActive()) {
+          itemsEl.innerHTML = '';
+          itemsEl.hidden = true;
+          sectionTitle.textContent = `Question ${activeItemIdx + 1} of ${n}`;
+          sectionSub.textContent = 'Opening your readiness dashboard…';
+          refreshResults();
+          updateNavChrome();
+          syncChecklistItemVisibility();
+          openReadinessDashboardOrShowAttestation();
+          return;
+        }
         const it = items[activeItemIdx];
         sectionTitle.textContent = `Question ${activeItemIdx + 1} of ${n}`;
         sectionSub.textContent = `${it.function || '—'} · ${it.category || '—'} · ${it.id}`;
 
         itemsEl.innerHTML = '';
         itemsEl.appendChild(renderItem(it));
+        itemsEl.hidden = false;
         refreshResults();
         updateNavChrome();
         syncChecklistItemVisibility();
@@ -2042,7 +2094,7 @@
         try {
           const mods = await api.getModules();
           if (!mods.length) {
-            assessmentMeta.textContent = 'No modules found. Add a module pack under backend/modules.';
+            showBootError('No modules found. Add a module pack under backend/modules.');
             return;
           }
           const module_id = mods[0].id;
@@ -2080,8 +2132,7 @@
           });
           await openAssessment(assessment_id, access_token);
         } catch (e) {
-          if (bootStatus) bootStatus.textContent = '';
-          assessmentMeta.textContent = `Could not load: ${e.message}`;
+          showBootError(`Could not load: ${e.message}`);
         }
       }
 
