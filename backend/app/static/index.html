@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>xahive Cybersecurity Compliance Checklist</title>
+    <title>xahive NIST Cybersecurity Compliance Assessment</title>
     <style>
       :root {
         font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -12,8 +12,8 @@
         --panel: #ffffff;
         --border: #e5e7ef;
         --text: #121622;
-        --muted: #5c657a;
-        --muted2: #7a8397;
+        --muted: #475467;
+        --muted2: #667085;
         --primary: #2b6fff;
         --primary2: #1f57d8;
         --danger: #b42318;
@@ -54,6 +54,21 @@
 
       .brand { font-weight: 720; letter-spacing: 0.2px; }
       .sub { color: var(--muted); font-size: 12px; }
+      .brandRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .brandLogo {
+        display: block;
+        height: 44px;
+        width: auto;
+        max-width: min(220px, 38vw);
+        flex: 0 0 auto;
+      }
+      .brandText { min-width: 0; }
 
       .btn {
         appearance: none;
@@ -77,9 +92,14 @@
         border-radius: 12px;
         padding: 10px 12px;
         outline: none;
+        box-sizing: border-box;
       }
       textarea { resize: vertical; }
       input:focus, select:focus, textarea:focus { border-color: rgba(43,111,255,0.55); box-shadow: 0 0 0 4px rgba(43,111,255,0.12); }
+
+      @media print {
+        #btnPrintDashboard { display: none !important; }
+      }
 
       .panel {
         background: var(--panel);
@@ -125,12 +145,82 @@
       .itemcard + .itemcard { margin-top: 12px; }
 
       /* Function tint badges */
-      .chip[data-func="GOVERN"] { background: var(--func-govern-bg); border-color: var(--func-govern-br); color: #1849a9; }
-      .chip[data-func="IDENTIFY"] { background: var(--func-identify-bg); border-color: var(--func-identify-br); color: #7a4a00; }
-      .chip[data-func="PROTECT"] { background: var(--func-protect-bg); border-color: var(--func-protect-br); color: #4a2ea3; }
-      .chip[data-func="DETECT"] { background: var(--func-detect-bg); border-color: var(--func-detect-br); color: #1a7f37; }
-      .chip[data-func="RESPOND"] { background: var(--func-respond-bg); border-color: var(--func-respond-br); color: #b54708; }
-      .chip[data-func="RECOVER"] { background: var(--func-recover-bg); border-color: var(--func-recover-br); color: #b42318; }
+      .chip[data-func="GOVERN"] { background: var(--func-govern-bg); border-color: var(--func-govern-br); color: #1d4ed8; }
+      .chip[data-func="IDENTIFY"] { background: var(--func-identify-bg); border-color: var(--func-identify-br); color: #854d0e; }
+      .chip[data-func="PROTECT"] { background: var(--func-protect-bg); border-color: var(--func-protect-br); color: #5b21b6; }
+      .chip[data-func="DETECT"] { background: var(--func-detect-bg); border-color: var(--func-detect-br); color: #166534; }
+      .chip[data-func="RESPOND"] { background: var(--func-respond-bg); border-color: var(--func-respond-br); color: #9a3412; }
+      .chip[data-func="RECOVER"] { background: var(--func-recover-bg); border-color: var(--func-recover-br); color: #991b1b; }
+
+      .metaGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .fieldLabel { font-size: 12px; color: var(--muted); font-weight: 650; }
+      .fieldHint { font-size: 12px; color: var(--muted2); margin-top: 4px; }
+      .readiness-q-meta { font-size: 12px; color: var(--muted); margin-top: 6px; text-align: center; }
+      .readiness-q-meta strong { color: var(--text); font-weight: 700; }
+      .introCard {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.72);
+        padding: 12px 14px;
+        margin-top: 12px;
+      }
+      .introCard + .introCard {
+        border-top: 3px solid rgba(31, 87, 216, 0.18);
+      }
+      .introTitle {
+        font-size: 14px;
+        font-weight: 750;
+        color: var(--text);
+        margin-bottom: 8px;
+        letter-spacing: 0.01em;
+      }
+      .introText {
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      .introText strong { color: var(--text); }
+      .subIntroLabel {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 750;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted2);
+        margin-bottom: 4px;
+      }
+      .instructionsList {
+        margin: 8px 0 0;
+        padding-left: 20px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      .instructionsList li { margin-bottom: 4px; }
+      .questionProgressWrap {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .metaStatusBadge {
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.7);
+        padding: 9px 10px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .metaStatusBadge[data-status="NotStarted"] { color: #334155; }
+      .metaStatusBadge[data-status="InProgress"] { color: #1e40af; }
+      .metaStatusBadge[data-status="Completed"] { color: #166534; }
+      .metaStatusBadge[data-status="NotApplicable"] { color: #475467; }
 
       .statusBadge {
         display: inline-flex;
@@ -279,6 +369,20 @@
         padding: 0 14px 14px;
         border-top: 1px solid rgba(0,0,0,0.06);
       }
+      .readiness-fn-definition {
+        margin: 12px 0 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.75);
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+        text-align: left;
+      }
+      .readiness-fn-definition strong {
+        color: var(--text);
+      }
 
       .readiness-q-grid {
         display: grid;
@@ -333,6 +437,28 @@
         border: 1px solid var(--border);
         background: #fff;
       }
+      .readiness-q-card.readiness-q-missing {
+        border-color: rgba(180, 35, 24, 0.45);
+        background: rgba(180, 35, 24, 0.04);
+      }
+      .readiness-q-missing-badge {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        color: var(--danger);
+        padding: 4px 8px;
+        border-radius: 8px;
+        border: 1px solid rgba(180, 35, 24, 0.35);
+        background: rgba(180, 35, 24, 0.06);
+      }
+      .readiness-fn-missing-note {
+        margin: 12px 0 0;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(180, 35, 24, 0.22);
+        background: rgba(180, 35, 24, 0.06);
+        color: var(--text);
+      }
 
       .readiness-narrative-overall {
         margin-bottom: 16px;
@@ -341,14 +467,6 @@
         border: 1px solid var(--border);
         background: rgba(255,255,255,0.75);
       }
-      .readiness-narrative-overall-h {
-        font-weight: 750;
-        font-size: 14px;
-        margin-bottom: 6px;
-        color: var(--text);
-      }
-      #readinessNarrativeMetaLine { margin-bottom: 10px; line-height: 1.4; }
-
       .readiness-narrative-cols {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -388,7 +506,10 @@
         margin-top: 20px;
         padding-top: 16px;
         border-top: 1px solid var(--border);
-        text-align: left;
+        text-align: center;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
       }
       .readiness-dashboard-footer h3 {
         margin: 0 0 8px;
@@ -396,12 +517,14 @@
         font-weight: 750;
         color: var(--text);
         line-height: 1.35;
+        text-align: center;
       }
       .readiness-dashboard-footer p {
         margin: 0 0 10px;
         font-size: 12px;
         line-height: 1.5;
         color: var(--muted);
+        text-align: center;
       }
       .readiness-dashboard-footer a {
         color: var(--primary2);
@@ -411,47 +534,157 @@
       .readiness-dashboard-footer a:hover {
         text-decoration: underline;
       }
+      .reference-list {
+        margin: 10px 0 0;
+        padding-left: 20px;
+      }
+      .reference-list li {
+        margin-bottom: 8px;
+      }
+      .reference-list a {
+        color: var(--primary2);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .reference-list a:hover {
+        text-decoration: underline;
+      }
+
+      .final-attestation-panel {
+        box-shadow: var(--shadow);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(247,248,251,0.99) 100%);
+        margin-bottom: 14px;
+        border: 1px solid var(--border);
+      }
+      .final-attestation-panel .final-attest-title {
+        font-weight: 780;
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .final-attestation-panel .final-attest-lead {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.5;
+        margin-bottom: 14px;
+      }
+      .final-attestation-panel .final-attest-statement {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text);
+        padding: 14px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.85);
+        margin-bottom: 16px;
+      }
+      .final-attestation-panel .final-attest-fields {
+        display: grid;
+        gap: 12px;
+        max-width: 520px;
+      }
+      .final-attestation-panel .final-attest-actions {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      .final-attestation-panel .final-attest-status {
+        font-size: 12px;
+      }
     </style>
   </head>
   <body>
     <header>
       <div class="wrap">
         <div class="row">
-          <div class="col">
-            <div class="brand">xahive Cybersecurity Compliance Checklist</div>
-            <div class="sub">Readiness checklist + per-control attestation</div>
+          <div class="brandRow">
+            <img
+              class="brandLogo"
+              src="./static/xahive-logo.png"
+              width="220"
+              height="60"
+              alt="xahive — Your Cybersecurity Partner"
+            />
+            <div class="col brandText">
+              <div class="brand">xahive NIST Cybersecurity Compliance Assessment</div>
+              <div class="sub">Readiness checklist + per-control attestation</div>
+            </div>
           </div>
           <div class="spacer"></div>
           <div class="tiny muted" id="bootStatus" aria-live="polite"></div>
           <div class="spacer"></div>
+          <button class="btn" type="button" id="btnReferences" title="Open reference links">References</button>
           <button class="btn" type="button" id="btnNewSession" title="Clear this browser’s checklist and start over">New session</button>
-          <button class="btn" type="button" id="btnRefreshModules" title="Reload the page">Reload</button>
+          <button class="btn" type="button" id="btnRefreshModules" title="Return to the assessment questions">Return to Assessment</button>
         </div>
       </div>
     </header>
     <main class="grid">
       <section class="panel pad" id="paneChecklist">
-        <div class="panel pad" style="box-shadow:none; background: rgba(255,255,255,0.65); margin-bottom: 14px">
-          <div class="tiny" id="assessmentMeta"></div>
-          <div class="row" style="margin-top: 10px; align-items: center; gap: 12px; flex-wrap: wrap">
-            <div class="progress" style="flex: 1; min-width: 180px; max-width: 420px; width: 100%" title="Completed controls (Implemented or N/A)">
-              <div id="progressBar"></div>
-            </div>
-            <div class="tiny" id="progressText"></div>
+        <div class="introCard" id="assessmentIntro" aria-label="Assessment introduction">
+          <div class="introTitle">Assessment Introduction</div>
+          <div class="introText"></div>
+        </div>
+        <div id="checklistTopPanel" class="panel pad" style="box-shadow:none; background: rgba(255,255,255,0.65); margin-bottom: 14px">
+          <div class="tiny" id="assessmentMeta" style="display:none;"></div>
+          <div class="tiny muted" id="resultsSummary" style="display:none;"></div>
+          <div class="introCard" id="assessmentInstructions" aria-label="Assessment instructions">
+            <div class="introTitle">Instructions</div>
+            <ol class="instructionsList">
+              <li>Read the <strong>Assessment Introduction</strong> above for scope and how to use this checklist.</li>
+              <li>For each control, review <strong>Context for this section</strong>, then answer the question and review the checklist criteria.</li>
+              <li>Check each criterion you have implemented. Your <strong>Status</strong> (shown on the control) updates automatically from your selections.</li>
+              <li>Enter the <strong>Owner</strong>. <strong>Target date</strong> is required when status is <strong>Not started</strong> or <strong>In progress</strong>; it is not required when status is <strong>Completed</strong> or when you mark <strong>Not applicable</strong>.</li>
+              <li>Check the attestation box, then select <strong>Save &amp; next</strong> (or mark <strong>Not applicable</strong> to skip checklist criteria for that control).</li>
+              <li>After the final control, complete the <strong>assessment attestation</strong> (name, signature, and date), then select <strong>Continue to dashboard</strong> to open your readiness results.</li>
+            </ol>
           </div>
-          <div class="tiny muted" id="resultsSummary" style="margin-top: 10px;"></div>
           <div class="row" style="margin-top: 14px; align-items: center; gap: 10px; flex-wrap: wrap">
             <button class="btn" type="button" id="btnPrevItem">Previous</button>
             <div class="col" style="flex: 1; min-width: 200px">
               <div style="font-weight:800; font-size: 18px;" id="sectionTitle">Question</div>
               <div class="tiny" id="sectionSub"></div>
+              <div class="questionProgressWrap">
+                <div class="progress" style="flex: 1; min-width: 180px; max-width: 420px; width: 100%" title="Completed controls (Implemented or N/A)">
+                  <div id="progressBar"></div>
+                </div>
+                <div class="tiny" id="progressText"></div>
+              </div>
             </div>
             <button class="btn" type="button" id="btnResults">Refresh summary</button>
             <button class="btn primary" type="button" id="btnReadiness" title="0–5 scoring matrix on the server" hidden>Readiness analysis</button>
           </div>
         </div>
+        <div id="finalAttestationPanel" class="panel pad final-attestation-panel" style="display:none" aria-labelledby="finalAttestationHeading">
+          <div class="final-attest-title" id="finalAttestationHeading">Assessment attestation</div>
+          <p class="final-attest-lead">Sign below to confirm your responses before opening the readiness dashboard.</p>
+          <div class="final-attest-statement" id="finalAttestationStatement"></div>
+          <div class="final-attest-fields">
+            <div class="col">
+              <label class="fieldLabel" for="finalAttestName">Name</label>
+              <input type="text" id="finalAttestName" name="final_attest_name" autocomplete="name" placeholder="Printed name" />
+            </div>
+            <div class="col">
+              <label class="fieldLabel" for="finalAttestSignature">Signature</label>
+              <input type="text" id="finalAttestSignature" name="final_attest_signature" autocomplete="off" placeholder="Type your full name as your electronic signature" />
+            </div>
+            <div class="col">
+              <label class="fieldLabel" for="finalAttestDate">Date</label>
+              <input type="date" id="finalAttestDate" name="final_attest_date" />
+            </div>
+          </div>
+          <div class="final-attest-actions">
+            <button class="btn primary" type="button" id="btnFinalAttestationContinue">Continue to dashboard</button>
+            <span class="final-attest-status muted" id="finalAttestationStatus" role="status" aria-live="polite"></span>
+          </div>
+        </div>
         <div id="readinessPanel" class="panel pad readiness-dashboard" style="display:none; box-shadow: var(--shadow); background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(247,248,251,0.98) 100%); margin-bottom: 14px; border: 1px solid var(--border)">
-          <div style="font-weight:780; font-size: 18px; margin-bottom: 4px">Readiness Dashboard</div>
+          <div class="row" style="align-items: baseline; gap: 10px">
+            <div style="font-weight:780; font-size: 18px; margin-bottom: 4px">Readiness Dashboard</div>
+            <div class="spacer"></div>
+            <button class="btn" type="button" id="btnPrintDashboard" title="Print this page">Print</button>
+          </div>
           <div class="tiny muted" style="margin-bottom: 14px">Overall score (0–100%) mapped on the gauge: red = lower readiness, yellow = mid, green = higher.</div>
           <div id="readinessGaugeHost" class="readiness-gauge-host"></div>
           <div id="readinessContent" class="tiny" style="margin-top: 8px"></div>
@@ -463,7 +696,21 @@
         </div>
         <div id="items"></div>
       </section>
+      <section class="panel pad" id="paneReferences" style="display:none;">
+        <div class="row" style="align-items: baseline; gap: 10px;">
+          <div style="font-weight:780; font-size: 18px;">References</div>
+          <div class="spacer"></div>
+          <button class="btn" type="button" id="btnReferenceBack">Back to assessment</button>
+        </div>
+        <div class="tiny muted" style="margin-top: 8px;">
+          Links sourced from this assessment content: public <strong>http(s)</strong> references, including official online PDFs. Local <code>file:</code> links, localhost, and PDFs served from this app’s <code>/static/</code> folder are omitted.
+        </div>
+        <ul id="referenceList" class="reference-list"></ul>
+      </section>
     </main>
+    <footer class="wrap tiny muted" style="padding-top: 4px; padding-bottom: 18px; text-align: center;">
+      Copyright @2026
+    </footer>
 
     <script src="./static/config.js"></script>
     <script>
@@ -472,6 +719,48 @@
         : '';
       const LS_PREFIX = 'xahive_assess_v1:';
       const LS_ACTIVE = 'xahive_active_session';
+      const ASSESSMENT_INTRO_TEXT = 'This assessment provides a comprehensive compliance reference for the NIST Cybersecurity Framework (CSF) 2.0, published by the National Institute of Standards and Technology in February 2024. The CSF 2.0 introduces six Core Functions - GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, and RECOVER - organized into 22 Categories and 107 Subcategories. Organizations can use this reference to conduct self-assessments against the CSF 2.0, prepare for third-party audits, build implementation roadmaps, develop security policies, and train cybersecurity and risk management staff.';
+      const FINAL_ATTESTATION_STATEMENT = 'I hereby attest that I accept full responsibility for all information provided for the assessment(s), including any documents or statements submitted in support thereof. I confirm that all information shared is true, accurate, and complete to the best of my knowledge and belief.';
+      const FUNCTION_INTROS = {
+        GOVERN: 'Cybersecurity risk management strategy, expectations, and policy are established, communicated, and monitored.',
+        IDENTIFY: "The organization's current cybersecurity risks are understood.",
+        PROTECT: "Safeguards to manage the organization's cybersecurity risks are used.",
+        DETECT: 'Possible cybersecurity attacks and compromises are found and analyzed.',
+        RESPOND: 'Actions regarding a detected cybersecurity incident are taken.',
+        RECOVER: 'Assets and operations affected by a cybersecurity incident are restored.',
+      };
+      const FUNCTION_DEFINITIONS = {
+        GOVERN: '<strong>GOVERN (GV)</strong><br/>Cybersecurity risk management strategy, expectations, and policy are established, communicated, and monitored.',
+        IDENTIFY: '<strong>IDENTIFY (ID)</strong><br/>The organization\'s current cybersecurity risks are understood.',
+        PROTECT: '<strong>PROTECT (PR)</strong><br/>Safeguards to manage the organization\'s cybersecurity risks are used.',
+        DETECT: '<strong>DETECT (DE)</strong><br/>Possible cybersecurity attacks and compromises are found and analyzed.',
+        RESPOND: '<strong>RESPOND (RS)</strong><br/>Actions regarding a detected cybersecurity incident are taken.',
+        RECOVER: '<strong>RECOVER (RC)</strong><br/>Assets and operations affected by a cybersecurity incident are restored.',
+      };
+      const CATEGORY_INTROS = {
+        'GV.OC': "The circumstances surrounding the organization's cybersecurity risk management decisions are understood.",
+        'GV.RM': "The organization's priorities, constraints, risk tolerance and appetite statements, and assumptions are established, communicated, and used to support operational risk decisions.",
+        'GV.RR': 'Cybersecurity roles, responsibilities, and authorities to foster accountability, performance assessment, and continuous improvement are established and communicated.',
+        'GV.PO': 'Organizational cybersecurity policy is established, communicated, and enforced.',
+        'GV.OV': 'Results of organization-wide cybersecurity risk management activities and performance are used to inform, improve, and adjust the risk management strategy.',
+        'GV.SC': 'Cyber supply chain risk management processes are identified, established, managed, monitored, and improved by organizational stakeholders.',
+        'ID.AM': 'Assets that enable the organization to achieve business purposes are identified and managed consistent with their relative importance and risk strategy.',
+        'ID.RA': 'The cybersecurity risk to the organization, assets, and individuals is understood.',
+        'ID.IM': 'Improvements to organizational cybersecurity risk management processes, procedures, and activities are identified across all CSF Functions.',
+        'PR.AA': 'Access to physical and logical assets is limited to authorized users, services, and hardware and managed commensurate with assessed risk.',
+        'PR.AT': "The organization's personnel are provided with cybersecurity awareness and training so that they can perform their cybersecurity-related tasks.",
+        'PR.DS': "Data are managed consistent with the organization's risk strategy to protect confidentiality, integrity, and availability of information.",
+        'PR.PS': "The hardware, software, and services of physical and virtual platforms are managed consistent with the organization's risk strategy.",
+        'PR.IR': 'Security architectures are managed to protect asset confidentiality, integrity, availability, and organizational resilience.',
+        'DE.CM': 'Assets are monitored to find anomalies, indicators of compromise, and other potentially adverse events.',
+        'DE.AE': 'Anomalies, indicators of compromise, and potentially adverse events are analyzed to characterize events and detect cybersecurity incidents.',
+        'RS.MA': 'Responses to detected cybersecurity incidents are managed.',
+        'RS.AN': 'Investigations are conducted to ensure effective response and support forensics and recovery activities.',
+        'RS.CO': 'Response activities are coordinated with internal and external stakeholders as required by laws, regulations, or policies.',
+        'RS.MI': 'Activities are performed to prevent expansion of an event and mitigate its effects.',
+        'RC.RP': 'Restoration activities are performed to ensure operational availability of systems and services affected by cybersecurity incidents.',
+        'RC.CO': 'Restoration activities are coordinated with internal and external parties.',
+      };
 
       function randomToken() {
         const a = new Uint8Array(24);
@@ -591,7 +880,7 @@
 
         const tick = Math.max(8, Math.round(11 * scale));
         ctx.font = `600 ${tick}px system-ui, -apple-system, Segoe UI, sans-serif`;
-        ctx.fillStyle = '#7a8397';
+        ctx.fillStyle = '#475467';
         ctx.textAlign = 'center';
         ctx.fillText('0', cx - r + 14 * scale, cy + 2 * scale);
         ctx.fillText('100', cx + r - 14 * scale, cy + 2 * scale);
@@ -620,7 +909,7 @@
           ul.className = `readiness-narr-ul ${kind}`;
           const li = document.createElement('li');
           li.className = 'tiny muted';
-          li.textContent = 'Loading commentary…';
+          li.textContent = 'Loading…';
           ul.appendChild(li);
           col.appendChild(h);
           col.appendChild(ul);
@@ -652,7 +941,6 @@
       }
 
       async function hydrateReadinessNarratives() {
-        const meta = document.getElementById('readinessNarrativeMetaLine');
         try {
           const narr = await api.postReadinessNarratives(current.module_id, current.responses);
           const overallEl = document.getElementById('readinessOverallNarrative');
@@ -662,22 +950,8 @@
             const sec = (narr.sections || []).find(s => s.function === fn);
             if (sec) fillNarrativeUl(el, sec);
           });
-          if (meta && narr.meta) {
-            const src = narr.meta.source || '';
-            let t = '';
-            if (src === 'template') {
-              t = 'Commentary is deterministic from your checklist scores (template). Set OPENAI_API_KEY on the server for GPT-style phrasing at temperature 0.';
-            } else if (src === 'openai_validated') {
-              t = 'Commentary from GPT with temperature 0, JSON schema, and control-ID validation.';
-              if (narr.meta.model) t += ' Model: ' + narr.meta.model + '.';
-            } else {
-              t = 'Source: ' + src + '.';
-            }
-            if (narr.meta.error) t += ' (' + narr.meta.error + ')';
-            meta.textContent = t;
-          }
         } catch (e) {
-          if (meta) meta.textContent = 'Could not load commentary: ' + e.message;
+          console.warn('Readiness narratives:', e);
         }
       }
 
@@ -707,15 +981,6 @@
         const overallNarr = document.createElement('div');
         overallNarr.id = 'readinessOverallNarrative';
         overallNarr.className = 'readiness-narrative-overall';
-        const overallH = document.createElement('div');
-        overallH.className = 'readiness-narrative-overall-h';
-        overallH.textContent = 'Narrative commentary';
-        const metaLine = document.createElement('div');
-        metaLine.id = 'readinessNarrativeMetaLine';
-        metaLine.className = 'tiny muted';
-        metaLine.textContent = 'Loading commentary…';
-        overallNarr.appendChild(overallH);
-        overallNarr.appendChild(metaLine);
         overallNarr.appendChild(buildNarrativeColumns());
         contentEl.appendChild(overallNarr);
 
@@ -774,6 +1039,11 @@
           const body = document.createElement('div');
           body.className = 'readiness-fn-body';
 
+          const def = document.createElement('div');
+          def.className = 'readiness-fn-definition tiny';
+          def.innerHTML = FUNCTION_DEFINITIONS[fn] || `<strong>${fn}</strong><br/>${FUNCTION_INTROS[fn] || ''}`;
+          body.appendChild(def);
+
           const narr = document.createElement('div');
           narr.className = 'readiness-narrative-block';
           narr.dataset.sectionNarrative = fn;
@@ -784,11 +1054,19 @@
           grid.className = 'readiness-q-grid';
 
           const inFn = byItems.filter(it => it.function === fn);
+          let missingCount = 0;
           for (const it of inFn) {
             const card = document.createElement('div');
             card.className = 'readiness-q-card';
             const qtext = it.question || '';
             const title = it.item_id || '';
+          const local = (current.responses && title) ? (current.responses[title] || {}) : {};
+          const owner = String(local.owner || '').trim();
+          const target = String(local.target_date || '').trim();
+          const ustatus = String(local.user_status || '').trim();
+          const targetRequired = ustatus === 'NotStarted' || ustatus === 'InProgress';
+          const missingMeta = !!it.included_in_rollup && (!owner || !ustatus || (targetRequired && !target));
+          if (missingMeta) missingCount += 1;
 
             if (!it.included_in_rollup) {
               card.classList.add('readiness-q-na');
@@ -808,8 +1086,19 @@
               card.appendChild(badge);
               card.appendChild(idEl);
               card.appendChild(te);
+              const meta = document.createElement('div');
+              meta.className = 'readiness-q-meta';
+              meta.innerHTML = `<div><strong>Owner</strong>: ${owner || '—'}</div><div><strong>Target</strong>: ${target || '—'}</div><div><strong>Status</strong>: ${ustatus || '—'}</div>`;
+              card.appendChild(meta);
               card.appendChild(sub);
             } else {
+              if (missingMeta) {
+                card.classList.add('readiness-q-missing');
+                const mb = document.createElement('div');
+                mb.className = 'readiness-q-missing-badge';
+                mb.textContent = 'Missing info';
+                card.appendChild(mb);
+              }
               const qCv = document.createElement('canvas');
               qCv.setAttribute('role', 'img');
               const qpct = it.readiness_percent;
@@ -827,11 +1116,21 @@
               card.appendChild(qCv);
               card.appendChild(idEl);
               card.appendChild(te);
+              const meta = document.createElement('div');
+              meta.className = 'readiness-q-meta';
+              meta.innerHTML = `<div><strong>Owner</strong>: ${owner || '—'}</div><div><strong>Target</strong>: ${target || '—'}</div><div><strong>Status</strong>: ${ustatus || '—'}</div>`;
+              card.appendChild(meta);
               card.appendChild(pdiv);
             }
             grid.appendChild(card);
           }
 
+          if (missingCount > 0) {
+            const note = document.createElement('div');
+            note.className = 'readiness-fn-missing-note';
+            note.innerHTML = `<strong>Action required:</strong> ${missingCount} control${missingCount === 1 ? '' : 's'} in this section ${missingCount === 1 ? 'is' : 'are'} missing <strong>Owner</strong>, <strong>Status</strong>, or a required <strong>Target date</strong> (required only for Not started/In progress).`;
+            body.appendChild(note);
+          }
           body.appendChild(grid);
           det.appendChild(sumEl);
           det.appendChild(body);
@@ -860,6 +1159,8 @@
         const panel = document.getElementById('readinessPanel');
         if (!current.module_id) return;
         panel.style.display = 'block';
+        panel.removeAttribute('data-readiness-loaded');
+        syncChecklistChromeForDashboard();
         gaugeHost.innerHTML = '<div class="readiness-gauge-loading muted">Calculating…</div>';
         el.innerHTML = '<span class="muted">Calculating…</span>';
         try {
@@ -868,6 +1169,9 @@
         } catch (e) {
           gaugeHost.innerHTML = '';
           el.innerHTML = `<span class="danger">${e.message}</span>`;
+          panel.removeAttribute('data-readiness-loaded');
+          syncChecklistChromeForDashboard();
+          syncChecklistItemVisibility();
         }
       }
 
@@ -881,6 +1185,9 @@
           checks: payload.checks,
           attestation_text: payload.attestation_text,
           attested: payload.attested,
+          owner: payload.owner,
+          target_date: payload.target_date,
+          user_status: payload.user_status,
           updated_at: now,
         };
         if (!rec.responses) rec.responses = {};
@@ -906,22 +1213,374 @@
       const bootStatus = document.getElementById('bootStatus');
       const btnNewSession = document.getElementById('btnNewSession');
       const btnRefreshModules = document.getElementById('btnRefreshModules');
+      const btnReferences = document.getElementById('btnReferences');
+      const btnReferenceBack = document.getElementById('btnReferenceBack');
       const paneChecklist = document.getElementById('paneChecklist');
+      const paneReferences = document.getElementById('paneReferences');
       const assessmentMeta = document.getElementById('assessmentMeta');
       const itemsEl = document.getElementById('items');
       const btnResults = document.getElementById('btnResults');
       const btnReadiness = document.getElementById('btnReadiness');
+      const btnPrintDashboard = document.getElementById('btnPrintDashboard');
       const resultsSummary = document.getElementById('resultsSummary');
+      const assessmentIntro = document.getElementById('assessmentIntro');
+      const assessmentInstructions = document.getElementById('assessmentInstructions');
+      const checklistTopPanel = document.getElementById('checklistTopPanel');
       const sectionTitle = document.getElementById('sectionTitle');
       const sectionSub = document.getElementById('sectionSub');
       const btnPrevItem = document.getElementById('btnPrevItem');
       const progressBar = document.getElementById('progressBar');
       const progressText = document.getElementById('progressText');
+      const referenceList = document.getElementById('referenceList');
+      const finalAttestationPanel = document.getElementById('finalAttestationPanel');
+      const finalAttestationStatement = document.getElementById('finalAttestationStatement');
+      const finalAttestName = document.getElementById('finalAttestName');
+      const finalAttestSignature = document.getElementById('finalAttestSignature');
+      const finalAttestDate = document.getElementById('finalAttestDate');
+      const btnFinalAttestationContinue = document.getElementById('btnFinalAttestationContinue');
+      const finalAttestationStatus = document.getElementById('finalAttestationStatus');
 
       let current = { id: null, token: null, module_id: null, module_version: null, items: [], responses: {} };
       let activeItemIdx = 0;
+      let previousView = 'assessment';
+      /** When true, next `renderCurrentQuestion` shows the control form even if final attestation is still pending (e.g. user clicked Return to Assessment). */
+      let suppressFinalAttestationResumeOnce = false;
 
-      /** Hide the last-question card once the readiness dashboard has loaded (scroll focuses on results). */
+      function normalizeUrl(url) {
+        if (!url) return null;
+        const trimmed = String(url).trim();
+        if (!/^https?:\/\//i.test(trimmed)) return null;
+        try {
+          const parsed = new URL(trimmed);
+          return parsed.href;
+        } catch (_) {
+          return null;
+        }
+      }
+
+      /** Public online PDFs (e.g. NIST) are included; local / bundled PDFs are not. */
+      function shouldIncludeReferenceLink(href) {
+        if (!href) return false;
+        let u;
+        try {
+          u = new URL(href);
+        } catch (_) {
+          return false;
+        }
+        if (u.protocol === 'file:') return false;
+        if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
+        const host = (u.hostname || '').toLowerCase();
+        if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0' || host === '[::1]' || host === '::1') return false;
+        const pathAndQuery = `${u.pathname || ''}${u.search || ''}`;
+        const isPdf = /\.pdf($|[?#])/i.test(pathAndQuery);
+        if (!isPdf) return true;
+        try {
+          if (typeof window !== 'undefined' && window.location && window.location.origin) {
+            if (u.origin === window.location.origin && /\/static\//i.test(u.pathname || '')) return false;
+          }
+        } catch (_) {}
+        return true;
+      }
+
+      function extractReferenceLinks(items) {
+        const found = new Set();
+        const addMatches = (text) => {
+          if (!text) return;
+          const matches = String(text).match(/https?:\/\/[^\s"'<>)\]}]+/gi) || [];
+          for (const raw of matches) {
+            const normalized = normalizeUrl(raw.replace(/[.,;:!?]+$/, ''));
+            if (!normalized) continue;
+            if (!shouldIncludeReferenceLink(normalized)) continue;
+            found.add(normalized);
+          }
+        };
+        for (const item of items || []) {
+          addMatches(item.question);
+          if (Array.isArray(item.practices)) {
+            for (const practice of item.practices) addMatches(practice);
+          }
+        }
+        return Array.from(found).sort((a, b) => a.localeCompare(b));
+      }
+
+      function isDashboardViewActive() {
+        const rp = document.getElementById('readinessPanel');
+        return !!(rp && rp.style.display !== 'none' && rp.getAttribute('data-readiness-loaded') === '1');
+      }
+
+      function isFinalAttestationPanelVisible() {
+        return !!(finalAttestationPanel && finalAttestationPanel.style.display === 'block');
+      }
+
+      function skipFinalAttestationGate() {
+        return previewDashboardRequested();
+      }
+
+      function hasSavedLastControlResponse() {
+        const n = current.items.length;
+        if (!n || !current.id || !current.token) return false;
+        const lastId = current.items[n - 1].id;
+        const r = current.responses[lastId];
+        return !!(r && r.updated_at);
+      }
+
+      function isFinalAttestationCompleteInRecord() {
+        if (!current.id || !current.token) return false;
+        try {
+          const rec = loadRecord(current.id, current.token);
+          const fa = rec.final_attestation;
+          return !!(
+            fa &&
+            fa.completed_at &&
+            String(fa.name || '').trim() &&
+            String(fa.signature || '').trim() &&
+            String(fa.date || '').trim()
+          );
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function needsFinalAttestationBeforeDashboard() {
+        if (skipFinalAttestationGate()) return false;
+        if (!hasSavedLastControlResponse()) return false;
+        return !isFinalAttestationCompleteInRecord();
+      }
+
+      function initFinalAttestationUi() {
+        if (finalAttestationStatement) finalAttestationStatement.textContent = FINAL_ATTESTATION_STATEMENT;
+      }
+
+      function prefillFinalAttestationFields() {
+        if (!finalAttestName || !finalAttestSignature || !finalAttestDate) return;
+        let fa = null;
+        try {
+          if (current.id && current.token) {
+            const rec = loadRecord(current.id, current.token);
+            fa = rec.final_attestation || null;
+          }
+        } catch (_) {}
+        if (fa && !fa.completed_at) {
+          finalAttestName.value = fa.name || '';
+          finalAttestSignature.value = fa.signature || '';
+          finalAttestDate.value = fa.date || '';
+        } else {
+          finalAttestName.value = '';
+          finalAttestSignature.value = '';
+          finalAttestDate.value = new Date().toISOString().slice(0, 10);
+        }
+      }
+
+      function showFinalAttestationPanel(fieldOverrides) {
+        initFinalAttestationUi();
+        if (finalAttestationPanel) finalAttestationPanel.style.display = 'block';
+        if (finalAttestationStatus) {
+          finalAttestationStatus.textContent = '';
+          finalAttestationStatus.classList.remove('danger');
+          finalAttestationStatus.classList.add('muted');
+        }
+        if (fieldOverrides && (fieldOverrides.name != null || fieldOverrides.signature != null || fieldOverrides.date != null)) {
+          if (finalAttestName) finalAttestName.value = fieldOverrides.name != null ? fieldOverrides.name : '';
+          if (finalAttestSignature) finalAttestSignature.value = fieldOverrides.signature != null ? fieldOverrides.signature : '';
+          if (finalAttestDate) finalAttestDate.value = fieldOverrides.date != null ? fieldOverrides.date : new Date().toISOString().slice(0, 10);
+        } else {
+          prefillFinalAttestationFields();
+        }
+        const rp = document.getElementById('readinessPanel');
+        if (rp) {
+          rp.style.display = 'none';
+          rp.removeAttribute('data-readiness-loaded');
+        }
+        syncChecklistItemVisibility();
+        syncChecklistChromeForDashboard();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function hideFinalAttestationPanel() {
+        if (finalAttestationPanel) finalAttestationPanel.style.display = 'none';
+        if (finalAttestationStatus) {
+          finalAttestationStatus.textContent = '';
+          finalAttestationStatus.classList.remove('danger');
+          finalAttestationStatus.classList.add('muted');
+        }
+        syncChecklistItemVisibility();
+        syncChecklistChromeForDashboard();
+      }
+
+      async function openReadinessDashboardOrShowAttestation() {
+        if (!skipFinalAttestationGate() && needsFinalAttestationBeforeDashboard()) {
+          showFinalAttestationPanel();
+          return;
+        }
+        await runReadinessAnalysis();
+      }
+
+      async function completeFinalAttestationAndOpenDashboard() {
+        if (!current.id || !current.token) return;
+        const name = String(finalAttestName && finalAttestName.value ? finalAttestName.value : '').trim();
+        const signature = String(finalAttestSignature && finalAttestSignature.value ? finalAttestSignature.value : '').trim();
+        const date = String(finalAttestDate && finalAttestDate.value ? finalAttestDate.value : '').trim();
+        if (!name || !signature || !date) {
+          if (finalAttestationStatus) {
+            finalAttestationStatus.textContent = 'Enter Name, Signature, and Date to continue.';
+            finalAttestationStatus.classList.remove('muted');
+            finalAttestationStatus.classList.add('danger');
+          }
+          return;
+        }
+        try {
+          const rec = loadRecord(current.id, current.token);
+          rec.final_attestation = {
+            name,
+            signature,
+            date,
+            completed_at: new Date().toISOString(),
+          };
+          saveRecord(current.id, rec);
+        } catch (e) {
+          if (finalAttestationStatus) {
+            finalAttestationStatus.textContent = `Could not save: ${e.message}`;
+            finalAttestationStatus.classList.remove('muted');
+            finalAttestationStatus.classList.add('danger');
+          }
+          return;
+        }
+        hideFinalAttestationPanel();
+        await runReadinessAnalysis();
+        const rp = document.getElementById('readinessPanel');
+        if (!rp || rp.getAttribute('data-readiness-loaded') !== '1') {
+          showFinalAttestationPanel({ name, signature, date });
+          if (finalAttestationStatus) {
+            finalAttestationStatus.textContent = 'Your attestation was saved. The readiness dashboard could not be loaded — check your connection and select Continue to dashboard again.';
+            finalAttestationStatus.classList.remove('muted');
+            finalAttestationStatus.classList.add('danger');
+          }
+        }
+      }
+
+      function renderReferencePage() {
+        if (!referenceList) return;
+        const links = extractReferenceLinks(current.items);
+        referenceList.innerHTML = '';
+        if (!links.length) {
+          const li = document.createElement('li');
+          li.className = 'tiny muted';
+          li.textContent = 'No reference links found yet for this assessment.';
+          referenceList.appendChild(li);
+          return;
+        }
+        for (const href of links) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = href;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = href;
+          li.appendChild(a);
+          referenceList.appendChild(li);
+        }
+      }
+
+      function showReferencePage() {
+        previousView = isDashboardViewActive() ? 'dashboard' : (isFinalAttestationPanelVisible() ? 'attestation' : 'assessment');
+        if (btnReferenceBack) {
+          btnReferenceBack.textContent = previousView === 'dashboard'
+            ? 'Back to dashboard'
+            : previousView === 'attestation'
+              ? 'Back to attestation'
+              : 'Back to assessment';
+        }
+        renderReferencePage();
+        if (paneChecklist) paneChecklist.style.display = 'none';
+        if (paneReferences) paneReferences.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function showPreviousViewFromReference() {
+        if (paneReferences) paneReferences.style.display = 'none';
+        if (paneChecklist) paneChecklist.style.display = 'block';
+        syncChecklistItemVisibility();
+        updateNavChrome();
+        if (previousView === 'dashboard') {
+          const rp = document.getElementById('readinessPanel');
+          if (rp && rp.getAttribute('data-readiness-loaded') !== '1') {
+            openReadinessDashboardOrShowAttestation();
+          }
+        } else if (previousView === 'attestation') {
+          showFinalAttestationPanel();
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function returnToAssessmentView() {
+        if (paneReferences) paneReferences.style.display = 'none';
+        if (paneChecklist) paneChecklist.style.display = 'block';
+        const rp = document.getElementById('readinessPanel');
+        if (rp) {
+          rp.style.display = 'none';
+          rp.setAttribute('data-readiness-loaded', '0');
+        }
+        hideFinalAttestationPanel();
+        suppressFinalAttestationResumeOnce = true;
+        renderCurrentQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function syncChecklistChromeForDashboard() {
+        const rp = document.getElementById('readinessPanel');
+        const n = current.items.length;
+        const onLast = n > 0 && activeItemIdx === n - 1;
+        const loaded = rp && rp.getAttribute('data-readiness-loaded') === '1';
+        const attestationVisible = isFinalAttestationPanelVisible();
+        if (checklistTopPanel) checklistTopPanel.style.display = (onLast && loaded) ? 'none' : '';
+        if (assessmentInstructions) assessmentInstructions.style.display = (onLast && (loaded || attestationVisible)) ? 'none' : '';
+      }
+
+      function previewDashboardRequested() {
+        try {
+          const p = new URLSearchParams(window.location.search || '');
+          const v = (p.get('previewDashboard') || '').toLowerCase();
+          return v === '1' || v === 'true' || v === 'yes';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function seedPreviewAssessment(id, token) {
+        if (!previewDashboardRequested()) return;
+        const rec = loadRecord(id, token);
+        const items = current.items || [];
+        if (!items.length) return;
+        const now = new Date().toISOString();
+        const responses = Object.assign({}, rec.responses || {});
+        for (const it of items) {
+          responses[it.id] = {
+            module_item_id: it.id,
+            status: 'NotApplicable',
+            notes: null,
+            checks: {},
+            attestation_text: null,
+            attested: true,
+            owner: 'Preview',
+            target_date: '',
+            user_status: 'NotApplicable',
+            updated_at: now,
+          };
+        }
+        rec.responses = responses;
+        rec.cursor_index = items.length - 1;
+        rec.final_attestation = {
+          name: 'Preview user',
+          signature: 'Preview',
+          date: now.slice(0, 10),
+          completed_at: now,
+        };
+        saveRecord(id, rec);
+        current.responses = Object.assign({}, responses);
+        activeItemIdx = items.length - 1;
+      }
+
+      /** Hide the last-question card once the readiness dashboard or final attestation step is active. */
       function syncChecklistItemVisibility() {
         const items = document.getElementById('items');
         const rp = document.getElementById('readinessPanel');
@@ -929,7 +1588,9 @@
         const n = current.items.length;
         const onLast = n > 0 && activeItemIdx === n - 1;
         const loaded = rp.getAttribute('data-readiness-loaded') === '1';
-        items.hidden = onLast && loaded;
+        const attestationVisible = isFinalAttestationPanelVisible();
+        items.hidden = onLast && (loaded || attestationVisible);
+        syncChecklistChromeForDashboard();
       }
 
       function findLegacySessionId() {
@@ -943,7 +1604,7 @@
         wrap.className = 'itemcard';
         wrap.setAttribute('data-func', it.function || '');
         const id = it.id;
-        const r = current.responses[id] || { status: 'NotStarted', checks: null, attestation_text: '', attested: false };
+        const r = current.responses[id] || { status: 'NotStarted', checks: null, attestation_text: '', attested: false, owner: '', target_date: '', user_status: '' };
         const practices = Array.isArray(it.practices) ? it.practices : [];
 
         wrap.innerHTML = `
@@ -956,7 +1617,18 @@
                   <span class="chip">${it.category}</span>
                 </div>
               </div>
-              <div class="tiny muted">${it.question}</div>
+              <div class="introCard" style="margin-top:10px;">
+                <div class="introTitle">Context for this section</div>
+                <div style="margin-top:2px;">
+                  <div class="subIntroLabel">Function (${it.function || '—'})</div>
+                  <div class="introText">${FUNCTION_INTROS[it.function] || 'Narrative intro not available for this function.'}</div>
+                </div>
+                <div style="margin-top:10px;">
+                  <div class="subIntroLabel">Category (${it.category || '—'})</div>
+                  <div class="introText">${CATEGORY_INTROS[it.category] || 'Narrative intro not available for this category.'}</div>
+                </div>
+              </div>
+              <div class="tiny muted" style="margin-top:10px;">${it.question}</div>
             </div>
             <div class="col" style="min-width: 240px; align-items: flex-end;">
               <div class="statusBadge" data-role="statusBadge" data-status="NotStarted">
@@ -975,7 +1647,30 @@
             </div>
           </div>
 
-          <div class="panel pad" style="box-shadow:none; background: rgba(255,255,255,0.55); margin-top: 12px;">
+          <div class="panel pad" data-role="disableOnNA" style="box-shadow:none; background: rgba(255,255,255,0.55); margin-top: 12px;">
+            <div style="font-weight:650">Owner / Target date / Status</div>
+            <div class="fieldHint">These fields are stored in this browser and shown on the dashboard.</div>
+            <div class="metaGrid">
+              <div class="col">
+                <div class="fieldLabel">Owner</div>
+                <input type="text" data-role="owner" placeholder="Name or team" />
+              </div>
+              <div class="col">
+                <div class="fieldLabel">Target date</div>
+                <input type="date" data-role="targetDate" />
+              </div>
+              <div class="col">
+                <div class="fieldLabel">Status</div>
+                <div class="metaStatusBadge" data-role="userStatusBadge" data-status="NotStarted">
+                  <span data-role="userStatusText">Not started</span>
+                </div>
+                <input type="hidden" data-role="userStatus" />
+                <div class="fieldHint">Calculated automatically from checklist selections.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel pad" data-role="disableOnNA" style="box-shadow:none; background: rgba(255,255,255,0.55); margin-top: 12px;">
             <div class="row">
               <div class="col" style="flex:1">
                 <div style="font-weight:650">Checklist criteria</div>
@@ -1003,9 +1698,19 @@
         const saveBtn = wrap.querySelector('[data-role="saveBtn"]');
         const practiceList = wrap.querySelector('[data-role="practiceList"]');
         const practiceHint = wrap.querySelector('[data-role="practiceHint"]');
+        const ownerEl = wrap.querySelector('[data-role="owner"]');
+        const targetDateEl = wrap.querySelector('[data-role="targetDate"]');
+        const userStatusEl = wrap.querySelector('[data-role="userStatus"]');
+        const userStatusBadge = wrap.querySelector('[data-role="userStatusBadge"]');
+        const userStatusText = wrap.querySelector('[data-role="userStatusText"]');
+        const practiceCbs = () => Array.from(wrap.querySelectorAll('input[data-role="practice"]'));
+        const naDisabledPanels = () => Array.from(wrap.querySelectorAll('[data-role="disableOnNA"]'));
         statusSel.value = r.status || 'NotStarted';
         attestCheck.checked = !!r.attested;
         naToggle.checked = (r.status === 'NotApplicable');
+        ownerEl.value = r.owner || '';
+        targetDateEl.value = r.target_date || '';
+        userStatusEl.value = r.user_status || '';
 
         // Render practice checkboxes
         const checks = Object.assign({}, r.checks || {});
@@ -1037,6 +1742,29 @@
           return Object.values(checks).filter(Boolean).length;
         }
 
+        function recomputeUserStatus() {
+          if (naToggle.checked) {
+            userStatusEl.value = 'NotApplicable';
+            userStatusBadge.setAttribute('data-status', 'NotApplicable');
+            userStatusText.textContent = 'Not applicable';
+            return;
+          }
+          const cc = checkedCount();
+          if (cc <= 0) {
+            userStatusEl.value = 'NotStarted';
+            userStatusBadge.setAttribute('data-status', 'NotStarted');
+            userStatusText.textContent = 'Not started';
+          } else if (practices.length > 0 && cc < practices.length) {
+            userStatusEl.value = 'InProgress';
+            userStatusBadge.setAttribute('data-status', 'InProgress');
+            userStatusText.textContent = 'In progress';
+          } else {
+            userStatusEl.value = 'Completed';
+            userStatusBadge.setAttribute('data-status', 'Completed');
+            userStatusText.textContent = 'Completed';
+          }
+        }
+
         function updateSaveGate() {
           const saveStatus = wrap.querySelector('[data-role="saveStatus"]');
           if (naToggle.checked) {
@@ -1044,6 +1772,19 @@
             saveStatus.textContent = '';
             saveStatus.classList.remove('danger');
             saveStatus.classList.add('muted');
+            return;
+          }
+          const ownerOk = String(ownerEl.value || '').trim().length > 0;
+          const userStatusOk = String(userStatusEl.value || '').trim().length > 0;
+          const needsDate = userStatusEl.value === 'NotStarted' || userStatusEl.value === 'InProgress';
+          const targetOk = String(targetDateEl.value || '').trim().length > 0;
+          if (!ownerOk || !userStatusOk || (needsDate && !targetOk)) {
+            saveBtn.disabled = true;
+            saveStatus.textContent = needsDate
+              ? 'Fill out Owner and Target date before saving.'
+              : 'Fill out Owner before saving.';
+            saveStatus.classList.remove('muted');
+            saveStatus.classList.add('danger');
             return;
           }
           if (!attestCheck.checked) {
@@ -1071,12 +1812,26 @@
           statusText.textContent = map[status] || status;
         }
 
+        function setNAInteractionMode(isNA) {
+          ownerEl.disabled = isNA;
+          targetDateEl.disabled = isNA;
+          userStatusEl.disabled = isNA;
+          attestCheck.disabled = isNA;
+          for (const cb of practiceCbs()) cb.disabled = isNA;
+          for (const panel of naDisabledPanels()) {
+            panel.style.opacity = isNA ? '0.55' : '1';
+          }
+        }
+
         function recomputeStatus() {
+          recomputeUserStatus();
           if (naToggle.checked) {
             setStatus('NotApplicable');
+            setNAInteractionMode(true);
             updateSaveGate();
             return;
           }
+          setNAInteractionMode(false);
           const cc = checkedCount();
           const allCriteriaMet = !practices.length || (cc === practices.length && cc > 0);
           const att = attestCheck.checked;
@@ -1091,11 +1846,16 @@
         }
 
         naToggle.addEventListener('change', () => {
+          if (!naToggle.checked && userStatusEl.value === 'NotApplicable') {
+            userStatusEl.value = '';
+          }
           recomputeStatus();
         });
         attestCheck.addEventListener('change', () => {
           recomputeStatus();
         });
+        ownerEl.addEventListener('input', updateSaveGate);
+        targetDateEl.addEventListener('change', updateSaveGate);
 
         saveBtn.addEventListener('click', async () => {
           const saveStatus = wrap.querySelector('[data-role="saveStatus"]');
@@ -1103,6 +1863,19 @@
             saveStatus.textContent = 'Check the attestation box before saving.';
             saveStatus.classList.add('danger');
             return;
+          }
+          if (!naToggle.checked) {
+            const ownerOk = String(ownerEl.value || '').trim().length > 0;
+            const userStatusOk = String(userStatusEl.value || '').trim().length > 0;
+            const needsDate = userStatusEl.value === 'NotStarted' || userStatusEl.value === 'InProgress';
+            const targetOk = String(targetDateEl.value || '').trim().length > 0;
+            if (!ownerOk || !userStatusOk || (needsDate && !targetOk)) {
+              saveStatus.textContent = needsDate
+                ? 'Fill out Owner and Target date before saving.'
+                : 'Fill out Owner before saving.';
+              saveStatus.classList.add('danger');
+              return;
+            }
           }
           saveStatus.textContent = 'Saving...';
           saveStatus.classList.remove('danger');
@@ -1113,6 +1886,9 @@
               checks,
               attestation_text: null,
               attested: attestCheck.checked,
+              owner: String(ownerEl.value || '').trim(),
+              target_date: String(targetDateEl.value || '').trim(),
+              user_status: String(userStatusEl.value || '').trim(),
             };
             const out = upsertLocal(current.id, current.token, id, payload);
             current.responses[id] = out;
@@ -1127,7 +1903,12 @@
               window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
               saveStatus.textContent = `Saved ${new Date(out.updated_at).toLocaleString()} · End of checklist`;
-              runReadinessAnalysis();
+              try {
+                const rec = loadRecord(current.id, current.token);
+                delete rec.final_attestation;
+                saveRecord(current.id, rec);
+              } catch (_) {}
+              showFinalAttestationPanel();
             }
           } catch (e) {
             saveStatus.textContent = `Error: ${e.message}`;
@@ -1135,11 +1916,7 @@
           }
         });
 
-        if (r.status === 'NotApplicable') {
-          setStatus('NotApplicable');
-        } else {
-          recomputeStatus();
-        }
+        recomputeStatus();
         updateSaveGate();
         return wrap;
       }
@@ -1166,6 +1943,7 @@
         const items = current.items;
         const n = items.length;
         if (!n) {
+          suppressFinalAttestationResumeOnce = false;
           sectionTitle.textContent = 'No questions';
           sectionSub.textContent = '';
           itemsEl.innerHTML = '<p class="tiny muted">No items in this module.</p>';
@@ -1174,6 +1952,20 @@
           return;
         }
         activeItemIdx = Math.max(0, Math.min(activeItemIdx, n - 1));
+        const skipResumeAttestation = suppressFinalAttestationResumeOnce;
+        suppressFinalAttestationResumeOnce = false;
+        if (!skipResumeAttestation && needsFinalAttestationBeforeDashboard() && activeItemIdx === n - 1) {
+          sectionTitle.textContent = `Question ${activeItemIdx + 1} of ${n}`;
+          sectionSub.textContent = 'Sign the assessment attestation below to open your readiness dashboard.';
+          itemsEl.innerHTML = '';
+          itemsEl.hidden = true;
+          showFinalAttestationPanel();
+          refreshResults();
+          updateNavChrome();
+          syncChecklistItemVisibility();
+          return;
+        }
+        hideFinalAttestationPanel();
         const it = items[activeItemIdx];
         sectionTitle.textContent = `Question ${activeItemIdx + 1} of ${n}`;
         sectionSub.textContent = `${it.function || '—'} · ${it.category || '—'} · ${it.id}`;
@@ -1199,10 +1991,20 @@
 
         localStorage.setItem(LS_ACTIVE, JSON.stringify({ id, token }));
         assessmentMeta.textContent = `${rec.module_id} (${rec.module_version}) · Stored in this browser only · questions in order`;
+        if (assessmentIntro) {
+          const introText = assessmentIntro.querySelector('.introText');
+          if (introText) introText.textContent = ASSESSMENT_INTRO_TEXT;
+        }
         if (bootStatus) bootStatus.textContent = '';
         const n = items.length;
         activeItemIdx = Math.min(Math.max(0, rec.cursor_index != null ? rec.cursor_index : 0), Math.max(0, n - 1));
+        seedPreviewAssessment(id, token);
         renderCurrentQuestion();
+        if (previewDashboardRequested()) {
+          refreshResults();
+          updateNavChrome();
+          runReadinessAnalysis();
+        }
       }
 
       function refreshResults() {
@@ -1210,11 +2012,11 @@
         const r = computeResults(current.items, current.responses);
         const t = r.totals_by_status || {};
         resultsSummary.textContent = `Implemented: ${t.Implemented||0} · In progress: ${t.InProgress||0} · Not started: ${t.NotStarted||0} · N/A: ${t.NotApplicable||0} · Weaknesses: ${r.weaknesses.length}`;
-        const total = (t.Implemented||0) + (t.InProgress||0) + (t.NotStarted||0) + (t.NotApplicable||0);
-        const done = (t.Implemented||0) + (t.NotApplicable||0);
-        const pct = total ? Math.round((done / total) * 100) : 0;
+        const total = current.items.length || 0;
+        const currentStep = total ? Math.min(activeItemIdx + 1, total) : 0;
+        const pct = total ? Math.round((currentStep / total) * 100) : 0;
         progressBar.style.width = `${pct}%`;
-        progressText.textContent = `${pct}%`;
+        progressText.textContent = `${currentStep}/${total} questions viewed (${pct}%)`;
       }
 
       btnNewSession.addEventListener('click', () => {
@@ -1231,7 +2033,9 @@
         if (legacy) localStorage.removeItem(LS_PREFIX + legacy);
         location.reload();
       });
-      btnRefreshModules.addEventListener('click', () => location.reload());
+      btnRefreshModules.addEventListener('click', returnToAssessmentView);
+      if (btnReferences) btnReferences.addEventListener('click', showReferencePage);
+      if (btnReferenceBack) btnReferenceBack.addEventListener('click', showPreviousViewFromReference);
 
       async function boot() {
         if (bootStatus) bootStatus.textContent = 'Loading checklist…';
@@ -1282,7 +2086,9 @@
       }
 
       btnResults.addEventListener('click', refreshResults);
-      btnReadiness.addEventListener('click', runReadinessAnalysis);
+      btnReadiness.addEventListener('click', openReadinessDashboardOrShowAttestation);
+      if (btnFinalAttestationContinue) btnFinalAttestationContinue.addEventListener('click', () => completeFinalAttestationAndOpenDashboard());
+      if (btnPrintDashboard) btnPrintDashboard.addEventListener('click', () => window.print());
       btnPrevItem.addEventListener('click', () => {
         if (activeItemIdx <= 0) return;
         activeItemIdx -= 1;
@@ -1294,4 +2100,6 @@
     </script>
   </body>
 </html>
+
+
 
